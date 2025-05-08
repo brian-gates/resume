@@ -9,7 +9,7 @@ export function Link({
   return (
     <NextLink
       className={cn(
-        "font-medium text-primary underline underline-offset-4 hover:text-primary/80",
+        "font-medium text-primary dark:text-primary underline underline-offset-4 hover:bg-primary/10 dark:hover:bg-primary/30 hover:text-primary dark:hover:text-white rounded px-1 -mx-1 transition-all duration-300 ease-in-out",
         className
       )}
       {...props}

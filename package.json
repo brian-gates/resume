@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run generate-resume && next build",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "generate-resume": "node scripts/generate-resume-files.js"
+    "lint": "next lint"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.14",

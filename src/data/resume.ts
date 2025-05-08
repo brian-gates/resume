@@ -5,6 +5,7 @@ export type ResumeData = {
     email: string;
     phone: string;
     github: string;
+    website: string;
   };
   summary: string;
   skills: {
@@ -27,6 +28,7 @@ export const resumeData: ResumeData = {
     email: "brian.g.gates@gmail.com",
     phone: "(949)280-4708",
     github: "https://github.com/brian-gates",
+    website: "https://brian.thegates.house/",
   },
   summary:
     "Building mission critical software and tools with web technologies since 2006.",

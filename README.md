@@ -20,6 +20,18 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Regenerating Resume Files
+
+The downloadable resume files (PDF, DOCX, TXT, and JSON) are automatically generated during the Next.js build process. The static generator is implemented as a Next.js API route that runs during build time.
+
+If you need to manually regenerate these files during development, start the development server and run:
+
+```bash
+npm run generate-resume
+```
+
+All resume files are generated from the central data source in `src/data/resume.ts` to ensure consistency between the website and downloadable files.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
