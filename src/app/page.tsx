@@ -1,3 +1,5 @@
+import { Github, Mail, Phone } from "lucide-react";
+import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Container } from "~/components/ui/container";
 import { ModeToggle } from "~/components/ui/mode-toggle";
@@ -26,19 +28,26 @@ export default function Resumé() {
           <ModeToggle />
         </div>
         <H3>Staff Software Engineer</H3>
-        <div>
-          <Link href="mailto:brian.g.gates@gmail.com">
+        <div className="flex flex-wrap gap-4 items-center my-4">
+          <Link
+            href="mailto:brian.g.gates@gmail.com"
+            className="flex items-center gap-1.5"
+          >
+            <Mail className="h-4 w-4" />
             brian.g.gates@gmail.com
           </Link>
-          <span>-</span>
-          <Link href="tel:+19492804708">(949)280-4708</Link>
-          <span>-</span>
+          <Link href="tel:+19492804708" className="flex items-center gap-1.5">
+            <Phone className="h-4 w-4" />
+            (949)280-4708
+          </Link>
           <Link
             href="https://github.com/brian-gates"
             target="_blank"
             rel="noopener noreferrer"
+            className="flex items-center gap-1.5"
           >
-            https://github.com/brian-gates
+            <Github className="h-4 w-4" />
+            github.com/brian-gates
           </Link>
         </div>
         <Lead>
@@ -49,16 +58,54 @@ export default function Resumé() {
 
       <Section>
         <H2>Skills</H2>
-        <div>
-          <P>
-            <span>Expert:</span> TypeScript, React, JavaScript, CSS, HTML,
-            Node.js, RESTful APIs, Git, UI, UX, A11y, Express, Electron, CI,
-            Next.js
-          </P>
-          <P>
-            <span>Intermediate:</span> C++, C#, PHP, OAuth, Python, Neo4j,
-            PostgreSQL, MySQL, GraphQL
-          </P>
+        <div className="space-y-4">
+          <div className="border-l-4 border-primary pl-4 py-2">
+            <P className="mb-2 font-medium">Expert:</P>
+            <div className="flex flex-wrap gap-2">
+              {[
+                "TypeScript",
+                "React",
+                "JavaScript",
+                "CSS",
+                "HTML",
+                "Node.js",
+                "RESTful APIs",
+                "Git",
+                "UI",
+                "UX",
+                "A11y",
+                "Express",
+                "Electron",
+                "CI",
+                "Next.js",
+              ].map((skill) => (
+                <Badge key={skill} variant="expert">
+                  {skill}
+                </Badge>
+              ))}
+            </div>
+          </div>
+
+          <div className="border-l-4 border-accent pl-4 py-2">
+            <P className="mb-2 font-medium">Intermediate:</P>
+            <div className="flex flex-wrap gap-2">
+              {[
+                "C++",
+                "C#",
+                "PHP",
+                "OAuth",
+                "Python",
+                "Neo4j",
+                "PostgreSQL",
+                "MySQL",
+                "GraphQL",
+              ].map((skill) => (
+                <Badge key={skill} variant="intermediate">
+                  {skill}
+                </Badge>
+              ))}
+            </div>
+          </div>
         </div>
       </Section>
 
@@ -315,7 +362,14 @@ export default function Resumé() {
           </List>
         </ExperienceCard>
       </Section>
-      <Button>Contact Me</Button>
+      <div className="flex justify-center mt-8">
+        <Button
+          size="lg"
+          className="animate-pulse hover:animate-none transition-all duration-300"
+        >
+          Contact Me
+        </Button>
+      </div>
     </Container>
   );
 }
