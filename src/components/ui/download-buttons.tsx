@@ -1,7 +1,7 @@
 "use client";
 
 import { FileJson, FileText, FileType } from "lucide-react";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { Link } from "./typography";
 
 const formats = [
@@ -35,10 +35,10 @@ export function DownloadButtons() {
   return (
     <div className="flex flex-wrap items-center gap-2">
       {formats.map((format, index) => (
-        <>
+        <React.Fragment key={format.extension}>
           {index > 0 && <div className="text-muted-foreground mx-1">•</div>}
-          <DownloadLink key={format.extension} format={format} />
-        </>
+          <DownloadLink format={format} />
+        </React.Fragment>
       ))}
     </div>
   );

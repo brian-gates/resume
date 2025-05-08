@@ -67,7 +67,7 @@ export function Resume({
             className="flex items-center gap-1.5"
           >
             <Globe className="h-4 w-4" />
-            brian.thegates.house
+            {contact.website}
           </Link>
         </div>
         <Lead>{summary}</Lead>
