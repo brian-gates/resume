@@ -13,9 +13,15 @@ git pull
 echo "Installing dependencies..."
 pnpm i
 
-# Build
+# Build with explicit error handling
 echo "Building application..."
-pnpm build
+if ! pnpm build; then
+  echo "Error: Build failed! Deployment aborted."
+  exit 1
+fi
+
+# Only continue if build succeeded
+echo "Build successful!"
 
 # Restart PM2 process
 echo "Restarting PM2 process..."
