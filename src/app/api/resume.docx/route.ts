@@ -36,6 +36,9 @@ export async function GET() {
           new Paragraph({
             children: [new TextRun(`GitHub: ${contact.github}`)],
           }),
+          new Paragraph({
+            children: [new TextRun(`Website: ${contact.website}`)],
+          }),
           new Paragraph({}),
 
           // Summary

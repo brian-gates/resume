@@ -10,7 +10,8 @@ export async function GET() {
     `Contact Information:
 Email: ${contact.email}
 Phone: ${contact.phone}
-GitHub: ${contact.github}\n`,
+GitHub: ${contact.github}
+Website: ${contact.website}\n`,
     `Summary:
 ${summary}\n`,
     `Skills:

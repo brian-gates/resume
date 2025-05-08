@@ -7,6 +7,7 @@ type Contact = {
   email: string;
   phone: string;
   github: string;
+  website: string;
 };
 
 type HeaderData = {
@@ -90,7 +91,10 @@ function addHeader(pdf: jsPDF, data: HeaderData, x: number, y: number): number {
   const yAfterPhone = yAfterEmail + 6;
 
   pdf.text(`GitHub: ${contact.github}`, x, yAfterPhone);
-  const yAfterContact = yAfterPhone + 12;
+  const yAfterGithub = yAfterPhone + 6;
+
+  pdf.text(`Website: ${contact.website}`, x, yAfterGithub);
+  const yAfterContact = yAfterGithub + 12;
 
   return yAfterContact;
 }

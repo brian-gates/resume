@@ -36,7 +36,7 @@ export function Resume({
           <ModeToggle />
         </div>
         <H3>{title}</H3>
-        <div className="flex flex-wrap gap-4 items-center my-4">
+        <div className="flex flex-col gap-2 my-4 items-start">
           <Link
             href={`mailto:${contact.email}`}
             className="flex items-center gap-1.5"
@@ -44,12 +44,10 @@ export function Resume({
             <Mail className="h-4 w-4" />
             {contact.email}
           </Link>
-          <div className="text-muted-foreground">•</div>
           <Link href={`tel:+19492804708`} className="flex items-center gap-1.5">
             <Phone className="h-4 w-4" />
             {contact.phone}
           </Link>
-          <div className="text-muted-foreground">•</div>
           <Link
             href={contact.github}
             target="_blank"
@@ -59,7 +57,6 @@ export function Resume({
             <Github className="h-4 w-4" />
             github.com/brian-gates
           </Link>
-          <div className="text-muted-foreground">•</div>
           <Link
             href={contact.website}
             target="_blank"
@@ -121,6 +118,15 @@ export function Resume({
       </Section>
       <div className="flex flex-col items-center gap-4 mt-8">
         <DownloadButtons />
+        <Link
+          href="https://github.com/brian-gates/resume"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 text-sm mt-2 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <Github className="h-3 w-3" />
+          Source code available on GitHub
+        </Link>
       </div>
     </Container>
   );
