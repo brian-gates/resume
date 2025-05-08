@@ -1,64 +1,56 @@
 import Link from "next/link";
 
-export default function Home() {
+export default function Resumé() {
   return (
-    <div className="max-w-4xl mx-auto p-8 sm:p-12 font-[family-name:var(--font-geist-sans)]">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold mb-1">Brian Gates</h1>
-        <h2 className="text-xl mb-2">Staff Software Engineer</h2>
-        <div className="flex flex-wrap gap-2 text-sm">
-          <Link
-            href="mailto:brian.g.gates@gmail.com"
-            className="hover:underline"
-          >
+    <div>
+      <header>
+        <h1>Brian Gates</h1>
+        <h2>Staff Software Engineer</h2>
+        <div>
+          <Link href="mailto:brian.g.gates@gmail.com">
             brian.g.gates@gmail.com
           </Link>
           <span>-</span>
-          <Link href="tel:+19492804708" className="hover:underline">
-            (949)280-4708
-          </Link>
+          <Link href="tel:+19492804708">(949)280-4708</Link>
           <span>-</span>
           <Link
             href="https://github.com/brian-gates"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:underline"
           >
             https://github.com/brian-gates
           </Link>
         </div>
-        <p className="mt-2 text-gray-700 dark:text-gray-300">
+        <p>
           Building mission critical software and tools with web technologies
           since 2006.
         </p>
       </header>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-bold mb-4 border-b pb-2">Skills</h2>
+      <section>
+        <h2>Skills</h2>
         <div>
-          <p className="mb-2">
-            <span className="font-semibold">Expert:</span> TypeScript, React,
-            JavaScript, CSS, HTML, Node.js, RESTful APIs, Git, UI, UX, A11y,
-            Express, Electron, CI, Next.js
+          <p>
+            <span>Expert:</span> TypeScript, React, JavaScript, CSS, HTML,
+            Node.js, RESTful APIs, Git, UI, UX, A11y, Express, Electron, CI,
+            Next.js
           </p>
           <p>
-            <span className="font-semibold">Intermediate:</span> C++, C#, PHP,
-            OAuth, Python, Neo4j, PostgreSQL, MySQL, GraphQL
+            <span>Intermediate:</span> C++, C#, PHP, OAuth, Python, Neo4j,
+            PostgreSQL, MySQL, GraphQL
           </p>
         </div>
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold mb-4 border-b pb-2">Experience</h2>
+        <h2>Experience</h2>
 
-        <div className="mb-8">
-          <div className="flex justify-between items-baseline mb-2">
-            <h3 className="text-xl font-semibold">Yardzen</h3>
-            <span className="text-gray-600 dark:text-gray-400">
-              March 2024 – present
-            </span>
+        <div>
+          <div>
+            <h3>Yardzen</h3>
+            <span>March 2024 – present</span>
           </div>
-          <ul className="list-disc pl-6 space-y-2">
+          <ul>
             <li>
               Led the replatforming from WordPress to Next.js, integrated
               Contentful for seamless content updates, and developed key
@@ -75,8 +67,9 @@ export default function Home() {
               weeks to hours.
             </li>
             <li>
-              Developed Lowe's Partnership page for a 750k email blast campaign,
-              resulting in 3.6k visitors and 109 add-to-carts in two weeks.
+              Developed Lowe&apos;s Partnership page for a 750k email blast
+              campaign, resulting in 3.6k visitors and 109 add-to-carts in two
+              weeks.
             </li>
             <li>
               Created Contractor Connect marketing funnel, generating 200 leads
@@ -102,20 +95,18 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className="mb-8">
-          <div className="flex justify-between items-baseline mb-2">
-            <h3 className="text-xl font-semibold">Hadrian</h3>
-            <span className="text-gray-600 dark:text-gray-400">
-              Oct 2023 – Feb 2024
-            </span>
+        <div>
+          <div>
+            <h3>Hadrian</h3>
+            <span>Oct 2023 – Feb 2024</span>
           </div>
-          <p className="italic mb-2">Senior Software Engineer</p>
-          <ul className="list-disc pl-6 space-y-2">
+          <p>Senior Software Engineer</p>
+          <ul>
             <li>
-              Helped build and release version two of Hadrian's internal
+              Helped build and release version two of Hadrian&apos;s internal
               workflow management software that guides all aspects of the
-              factory's execution to build high precision parts for aerospace
-              and aeronautics.
+              factory&apos;s execution to build high precision parts for
+              aerospace and aeronautics.
             </li>
             <li>
               Built visual Node-based workflow editor with Xyflow (formerly
@@ -135,8 +126,8 @@ export default function Home() {
               traces, errors, logs, and session replays.
             </li>
             <li>
-              Collaborated with backend teams to negotiate API endpoints' proto
-              specifications.
+              Collaborated with backend teams to negotiate API endpoints&apos;
+              proto specifications.
             </li>
             <li>
               Gathered feedback from users to implement features and
@@ -145,18 +136,14 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className="mb-8">
-          <div className="flex justify-between items-baseline mb-2">
-            <h3 className="text-xl font-semibold">Dollar Shave Club</h3>
-            <span className="text-gray-600 dark:text-gray-400">
-              Feb 2020 - April 2023
-            </span>
+        <div>
+          <div>
+            <h3>Dollar Shave Club</h3>
+            <span>Feb 2020 - April 2023</span>
           </div>
-          <p className="italic mb-2">Software Engineering Manager</p>
-          <p className="mb-2">
-            Managed Frontend and Backend engineering teams.
-          </p>
-          <ul className="list-disc pl-6 space-y-2">
+          <p>Software Engineering Manager</p>
+          <p>Managed Frontend and Backend engineering teams.</p>
+          <ul>
             <li>
               Reduced average time to response from weeks to hours by
               implementing a new engineering incident response process.
@@ -190,18 +177,14 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className="mb-8">
-          <div className="flex justify-between items-baseline mb-2">
-            <h3 className="text-xl font-semibold">Dollar Shave Club</h3>
-            <span className="text-gray-600 dark:text-gray-400">
-              Feb 2018 - Feb 2020
-            </span>
+        <div>
+          <div>
+            <h3>Dollar Shave Club</h3>
+            <span>Feb 2018 - Feb 2020</span>
           </div>
-          <p className="italic mb-2">Senior Software Engineer</p>
-          <p className="mb-2">
-            Developed dollarshaveclub.com and internal tooling.
-          </p>
-          <ul className="list-disc pl-6 space-y-2">
+          <p>Senior Software Engineer</p>
+          <p>Developed dollarshaveclub.com and internal tooling.</p>
+          <ul>
             <li>
               Worked with the Frontend team to upgrade the site experience to
               the latest Web Content Accessibility Guidelines standards.
@@ -227,16 +210,14 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className="mb-8">
-          <div className="flex justify-between items-baseline mb-2">
-            <h3 className="text-xl font-semibold">Codex Digital</h3>
-            <span className="text-gray-600 dark:text-gray-400">
-              Jun 2013 - Oct 2017
-            </span>
+        <div>
+          <div>
+            <h3>Codex Digital</h3>
+            <span>Jun 2013 - Oct 2017</span>
           </div>
-          <p className="italic mb-2">Senior Software Engineer</p>
-          <p className="mb-2">Led the R&D team on various projects.</p>
-          <ul className="list-disc pl-6 space-y-2">
+          <p>Senior Software Engineer</p>
+          <p>Led the R&D team on various projects.</p>
+          <ul>
             <li>
               Collaborated with the core team to implement a shot pull system
               used by Marvel using Node, Express, Neo4j, and Redis for the REST
@@ -244,7 +225,7 @@ export default function Home() {
             </li>
             <li>
               Created cross-platform desktop application to facilitate uploading
-              media to Netflix's Asset Ingestion API using Electron, React,
+              media to Netflix&apos;s Asset Ingestion API using Electron, React,
               Node, and CouchDB.
             </li>
             <li>
@@ -270,18 +251,16 @@ export default function Home() {
         </div>
 
         <div>
-          <div className="flex justify-between items-baseline mb-2">
-            <h3 className="text-xl font-semibold">5th Kind</h3>
-            <span className="text-gray-600 dark:text-gray-400">
-              Jun 2009 - Jun 2013
-            </span>
+          <div>
+            <h3>5th Kind</h3>
+            <span>Jun 2009 - Jun 2013</span>
           </div>
-          <p className="italic mb-2">Lead Software Engineer</p>
-          <p className="mb-2">
+          <p>Lead Software Engineer</p>
+          <p>
             Led the team in the development and maintenance of their Digital
             Asset Management software.
           </p>
-          <ul className="list-disc pl-6 space-y-2">
+          <ul>
             <li>
               Engineered proprietary front-end extensible component-based JS
               framework.
