@@ -18,7 +18,10 @@ export const metadata: Metadata = {
   description:
     "Resume of Brian Gates, Staff Software Engineer with expertise in TypeScript, React, and web technologies",
   icons: {
-    icon: "/favicon.svg",
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
     apple: "/favicon.svg",
   },
 };
