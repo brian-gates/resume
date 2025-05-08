@@ -12,7 +12,8 @@
     "pm2:restart": "pm2 restart ecosystem.config.js",
     "pm2:status": "pm2 status",
     "pm2:logs": "pm2 logs",
-    "pm2:monit": "pm2 monit"
+    "pm2:monit": "pm2 monit",
+    "deploy": "./scripts/deploy.sh"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.14",
