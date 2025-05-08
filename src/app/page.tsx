@@ -1,5 +1,6 @@
 import { Button } from "~/components/ui/button";
 import { Container } from "~/components/ui/container";
+import { ModeToggle } from "~/components/ui/mode-toggle";
 import {
   DateRange,
   ExperienceCard,
@@ -20,7 +21,10 @@ export default function Resumé() {
   return (
     <Container>
       <header>
-        <H1>Brian Gates</H1>
+        <div className="flex justify-between items-center mb-4">
+          <H1>Brian Gates</H1>
+          <ModeToggle />
+        </div>
         <H3>Staff Software Engineer</H3>
         <div>
           <Link href="mailto:brian.g.gates@gmail.com">
