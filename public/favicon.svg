@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Purple circle background using primary color -->
+  <circle cx="256" cy="256" r="256" fill="oklch(0.45 0.22 280)"/>
+  
+  <!-- BG text in white using the site's font -->
+  <text x="256" y="278" font-family="Geist Sans, Geist, system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="300" font-weight="bold" text-anchor="middle" dominant-baseline="middle" fill="white">BG</text>
+</svg>

@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   title: "Brian Gates | Staff Software Engineer",
   description:
     "Resume of Brian Gates, Staff Software Engineer with expertise in TypeScript, React, and web technologies",
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
