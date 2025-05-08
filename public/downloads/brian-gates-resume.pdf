@@ -1,0 +1,726 @@
+%PDF-1.3
+%ºß¬à
+3 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 595.2799999999999727 841.8899999999999864]
+/Contents 4 0 R
+>>
+endobj
+4 0 obj
+<<
+/Length 11181
+>>
+stream
+0.5670000000000001 w
+0 G
+BT
+/F1 24 Tf
+27.5999999999999979 TL
+0 g
+56.6929133858267775 785.1970866141732586 Td
+(Brian Gates) Tj
+ET
+BT
+/F1 16 Tf
+18.3999999999999986 TL
+0 g
+56.6929133858267775 756.8506299212598378 Td
+(Staff Software Engineer) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0 g
+56.6929133858267775 728.5041732283464171 Td
+(Email: brian.g.gates@gmail.com) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0 g
+56.6929133858267775 711.4962992125983874 Td
+(Phone: \(949\)280-4708) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0 g
+56.6929133858267775 694.4884251968503577 Td
+(GitHub: https://github.com/brian-gates) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0 g
+56.6929133858267775 660.4726771653542983 Td
+(Summary) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0 g
+56.6929133858267775 643.4648031496062686 Td
+(Building mission critical software and tools with web technologies since 2006.) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0 g
+56.6929133858267775 609.4490551181102092 Td
+(Skills) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0 g
+56.6929133858267775 592.4411811023621794 Td
+(Expert: TypeScript, React, JavaScript, CSS, HTML, Node.js, RESTful APIs, Git, UI, UX, A11y,) Tj
+T* (Express, CI/CD, Next.js) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0 g
+56.6929133858267775 547.086850393700729 Td
+(Intermediate: C#, C++, Electron, GraphQL, MySQL, Neo4j, Nest.js, OAuth, PHP, PostgreSQL,) Tj
+T* (Python) Tj
+ET
+BT
+/F1 14 Tf
+16.0999999999999979 TL
+0 g
+56.6929133858267775 501.7325196850393354 Td
+(Experience) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0 g
+56.6929133858267775 484.7246456692913057 Td
+(Yardzen - Staff Software Engineer) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+56.6929133858267775 467.716771653543276 Td
+(March 2024 - present) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 450.7088976377952463 Td
+(- Led the replatforming from WordPress to Next.js, integrated Contentful for seamless content updates,) Tj
+T* (and developed key marketing projects, contributing to significant user engagement and conversion rates) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 422.3624409448818255 Td
+(- Replatformed from slow WordPress to blazing-fast Next.js, deploying on CloudRun via GitHub Actions) Tj
+T* (and Nx) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 394.0159842519684616 Td
+(- Integrated Contentful, enabling non-engineering teams to create and update pages independently,) Tj
+T* (reducing the release cycle from weeks to hours) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 365.6695275590550409 Td
+(- Developed Lowe's Partnership page for a 750k email blast campaign, resulting in 3.6k visitors and 109) Tj
+T* (add-to-carts in two weeks) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 337.323070866141677 Td
+(- Created Contractor Connect marketing funnel, generating 200 leads and a 9% conversion rate in the first) Tj
+T* (month) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 308.9766141732283131 Td
+(- Established a Design System with design and marketing, including Iconography and Colors pages,) Tj
+T* (leading to a more consistent user experience) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 280.6301574803148924 Td
+(- Created a Storybook for documenting implemented components, leading to increased re-use by Product) Tj
+T* (and Design teams) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 252.2837007874014716 Td
+(- Ensured accessibility compliance by implementing best practices and adhering to WCAG guidelines) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 238.1104724409448181 Td
+(- Trained junior team members and created extensive documentation for knowledge transfer) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0 g
+56.6929133858267775 201.2600787401573825 Td
+(Hadrian - Senior Software Engineer) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+56.6929133858267775 184.2522047244093528 Td
+(Oct 2023 - Feb 2024) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 167.2443307086613231 Td
+(- Helped build and release version two of Hadrian's internal workflow management software that guides all) Tj
+T* (aspects of the factory's execution to build high precision parts for aerospace and aeronautics) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 138.8978740157479024 Td
+(- Built visual Node-based workflow editor with Xyflow \(formerly React Flow\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 124.7246456692912489 Td
+(- Crafted responsive UIs from Figma designs in Next.js/React with TailwindCSS, Radix, and ShadUI) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 110.5514173228345953 Td
+(- Created type-safe forms with helpful validations using Zod, React-hook-forms, and TypeScript) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 96.3781889763778281 Td
+(- Ensured system observability by working with infrastructure team to integrate Next.js and Datadog for) Tj
+T* (visibility into spans, traces, errors, logs, and session replays) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 68.0317322834645211 Td
+(- Collaborated with backend teams to negotiate API endpoints' proto specifications) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 53.8585039370077538 Td
+(- Gathered feedback from users to implement features and improvements) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0 g
+56.6929133858267775 17.0081102362203183 Td
+(Dollar Shave Club - Software Engineering Manager) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+56.6929133858267775 0.0002362204722886 Td
+(Feb 2020 - April 2023) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -17.0076377952757412 Td
+(- Reduced average time to response from weeks to hours by implementing a new engineering incident) Tj
+T* (response process) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -45.3540944881890482 Td
+(- Reduced average number of errors per session by 75% by improving observability tooling and triage) Tj
+T* (process) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -73.7005511811024689 Td
+(- Onboarded and offboarded third party engineering teams, established new processes and team) Tj
+T* (structures to facilitate productive collaboration) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -102.0470078740158897 Td
+(- Interviewed, hired, and onboarded new engineers) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -116.2202362204725432 Td
+(- Held regular one on ones with engineers to discuss goals, growth, and career advancement) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -130.3934645669291967 Td
+(- Oversaw migration of site to a new platform, reducing engineering overhead and total staff count) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -144.5666929133859639 Td
+(- Orchestrated holiday events, parties, and game nights to boost morale. Two time winner of Top Tacos) Tj
+T* (award for keeping it fun) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -172.9131496062993847 Td
+(- Mentored engineers with regular code pairings and learning activities) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0 g
+56.6929133858267775 -209.7635433070867066 Td
+(Dollar Shave Club - Senior Software Engineer) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+56.6929133858267775 -226.7714173228347363 Td
+(Feb 2018 - Feb 2020) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -243.779291338582766 Td
+(- Worked with the Frontend team to upgrade the site experience to the latest Web Content Accessibility) Tj
+T* (Guidelines standards) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -272.1257480314963004 Td
+(- Worked with the Data team to ensure functional business analytics and reporting) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -286.298976377952954 Td
+(- Ran A/B tests to measure the impact of UX changes) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -300.4722047244096075 Td
+(- Maintained and added features to internal tooling) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -314.645433070866261 Td
+(- Rebuilt checkout experience from JavaScript to TypeScript and 0 to 100% test coverage) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -328.8186614173229145 Td
+(- Paired with Backend team engineers to discuss API changes) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -342.9918897637795681 Td
+(- Partnered with design team to establish a common design language) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -357.165118110236449 Td
+(- Integrated Contentful to enable the Product team to rapidly roll out new landing pages) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0 g
+56.6929133858267775 -394.0155118110236572 Td
+(Codex Digital - Senior Software Engineer) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+56.6929133858267775 -411.0233858267716869 Td
+(Jun 2013 - Oct 2017) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -428.0312598425197166 Td
+(- Collaborated with the core team to implement a shot pull system used by Marvel using Node, Express,) Tj
+T* (Neo4j, and Redis for the REST API, and Ember.js for the UI) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -456.377716535433251 Td
+(- Created cross-platform desktop application to facilitate uploading media to Netflix's Asset Ingestion API) Tj
+T* (using Electron, React, Node, and CouchDB) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -484.7241732283465581 Td
+(- Created a reporting system to track and verify shot archival used by Shed using Node, Express, Neo4j,) Tj
+T* (Redis, wkhtmltopdf, and Ember.js) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -513.0706299212600925 Td
+(- Created a lens tracking database using Node.js, Ember.js, Neo4j, and Redis) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -527.243858267716746 Td
+(- Implemented workflow tools such as JIRA, GitHub, Slack, and Travis CI, to help team organization,) Tj
+T* (communication, and development flow) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -555.5903149606300531 Td
+(- Worked closely with a security team to ensure software always met highest security standards, including) Tj
+T* (code audits and penetration testing) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+0 g
+56.6929133858267775 -606.6139370078741422 Td
+(5th Kind - Lead Software Engineer) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+56.6929133858267775 -623.6218110236221719 Td
+(Jun 2009 - Jun 2013) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -640.6296850393702016 Td
+(- Engineered proprietary front-end extensible component-based JS framework) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -654.8029133858268551 Td
+(- Assisted in building a proprietary component-based PHP framework) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -668.976141732283736 Td
+(- Maintained and extended custom ORM, including applying an optimization that reduced memory usage) Tj
+T* (by ~85%) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -697.3225984251970431 Td
+(- Worked with the team to refine development processes, discuss development ideas, and encourage high) Tj
+T* (morale and productivity) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -725.6690551181103501 Td
+(- Worked closely with management to set and achieve realistic goals and expectations) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0 g
+70.8661417322834666 -739.8422834645670036 Td
+(- Ensured code met and maintained high security standards, including security audits and penetration) Tj
+T* (tests) Tj
+ET
+endstream
+endobj
+1 0 obj
+<</Type /Pages
+/Kids [3 0 R ]
+/Count 1
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+6 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+8 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/BaseFont /Courier
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+10 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Roman
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+14 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+15 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Italic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/BaseFont /Times-BoldItalic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+17 0 obj
+<<
+/Type /Font
+/BaseFont /ZapfDingbats
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+18 0 obj
+<<
+/Type /Font
+/BaseFont /Symbol
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+2 0 obj
+<<
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+/Font <<
+/F1 5 0 R
+/F2 6 0 R
+/F3 7 0 R
+/F4 8 0 R
+/F5 9 0 R
+/F6 10 0 R
+/F7 11 0 R
+/F8 12 0 R
+/F9 13 0 R
+/F10 14 0 R
+/F11 15 0 R
+/F12 16 0 R
+/F13 17 0 R
+/F14 18 0 R
+>>
+/XObject <<
+>>
+>>
+endobj
+19 0 obj
+<<
+/Producer (jsPDF 3.0.1)
+/CreationDate (D:20250507185649-07'00')
+>>
+endobj
+20 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+/OpenAction [3 0 R /FitH null]
+/PageLayout /OneColumn
+>>
+endobj
+xref
+0 21
+0000000000 65535 f 
+0000011386 00000 n 
+0000013203 00000 n 
+0000000015 00000 n 
+0000000152 00000 n 
+0000011443 00000 n 
+0000011568 00000 n 
+0000011698 00000 n 
+0000011831 00000 n 
+0000011968 00000 n 
+0000012091 00000 n 
+0000012220 00000 n 
+0000012352 00000 n 
+0000012488 00000 n 
+0000012616 00000 n 
+0000012743 00000 n 
+0000012872 00000 n 
+0000013005 00000 n 
+0000013107 00000 n 
+0000013451 00000 n 
+0000013537 00000 n 
+trailer
+<<
+/Size 21
+/Root 20 0 R
+/Info 19 0 R
+/ID [ <6A0554611F04F67E9F7735A80E2AB8B6> <6A0554611F04F67E9F7735A80E2AB8B6> ]
+>>
+startxref
+13641
+%%EOF

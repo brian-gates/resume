@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+avoid mutation
+write pure functions
+prefer const over let
