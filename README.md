@@ -46,3 +46,31 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Production Management with PM2
+
+This project includes configuration for [PM2](https://pm2.keymetrics.io/), a production process manager for Node.js applications.
+
+To manage the production application:
+
+```bash
+# Start the application
+pnpm pm2:start
+
+# Check status
+pnpm pm2:status
+
+# View logs
+pnpm pm2:logs
+
+# Monitor CPU/Memory usage
+pnpm pm2:monit
+
+# Restart the application
+pnpm pm2:restart
+
+# Stop the application
+pnpm pm2:stop
+```
+
+The PM2 configuration is stored in `ecosystem.config.js` and can be modified to adjust settings like memory limits, instance count, or environment variables.
