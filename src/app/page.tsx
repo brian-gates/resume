@@ -75,8 +75,7 @@ export default function Resumé() {
                 "UX",
                 "A11y",
                 "Express",
-                "Electron",
-                "CI",
+                "CI/CD",
                 "Next.js",
               ].map((skill) => (
                 <Badge key={skill} variant="expert">
@@ -90,15 +89,17 @@ export default function Resumé() {
             <P className="mb-2 font-medium">Intermediate:</P>
             <div className="flex flex-wrap gap-2">
               {[
-                "C++",
                 "C#",
-                "PHP",
-                "OAuth",
-                "Python",
-                "Neo4j",
-                "PostgreSQL",
-                "MySQL",
+                "C++",
+                "Electron",
                 "GraphQL",
+                "MySQL",
+                "Neo4j",
+                "Nest.js",
+                "OAuth",
+                "PHP",
+                "PostgreSQL",
+                "Python",
               ].map((skill) => (
                 <Badge key={skill} variant="intermediate">
                   {skill}
