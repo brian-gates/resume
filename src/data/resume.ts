@@ -69,9 +69,10 @@ export const resumeData: ResumeData = {
       position: "Staff Software Engineer",
       period: "March 2024 – present",
       achievements: [
-        "Led the replatforming from WordPress to Next.js, integrated Contentful for seamless content updates, and developed key marketing projects, contributing to significant user engagement and conversion rates",
         "Replatformed from slow WordPress to blazing-fast Next.js, deploying on CloudRun via GitHub Actions and Nx",
+        "Championed AI tooling like Cursor, establishing rules for AI, adding MCP integrations, and promoting best practices for using AI agents to write code",
         "Integrated Contentful, enabling non-engineering teams to create and update pages independently, reducing the release cycle from weeks to hours",
+        "Built new onboarding quiz, doubling the conversion rate of its former",
         "Developed Lowe's Partnership page for a 750k email blast campaign, resulting in 3.6k visitors and 109 add-to-carts in two weeks",
         "Created Contractor Connect marketing funnel, generating 200 leads and a 9% conversion rate in the first month",
         "Established a Design System with design and marketing, including Iconography and Colors pages, leading to a more consistent user experience",
