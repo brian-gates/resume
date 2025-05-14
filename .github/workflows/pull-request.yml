@@ -1,0 +1,34 @@
+name: Pull Request Check
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: pnpm i
+
+      - name: Build application
+        run: pnpm build
+
+      - name: Verify build output
+        run: |
+          if [ -d ".next" ]; then
+            echo "✅ Build successful! Production build verified."
+            exit 0
+          else
+            echo "❌ Build failed or .next directory not found."
+            exit 1
+          fi
