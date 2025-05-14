@@ -17,62 +17,42 @@ on:
           - production
 
 jobs:
-  build:
-    runs-on: self-hosted
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20"
-
-      - name: Install dependencies
-        run: pnpm i
-
-      - name: Build application
-        run: pnpm build
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-output
-          path: .next/
-          retention-days: 1
-
-  deploy:
-    needs: build
+  build-and-deploy:
     runs-on: self-hosted
     environment: ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }}
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        run: |
+          if [ -d "repo" ]; then
+            cd repo
+            git pull
+          else
+            git clone https://github.com/brian-gates/resume.git repo
+            cd repo
+          fi
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20"
+      - name: Set environment variable
+        run: |
+          echo "ENV=${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }}" >> $GITHUB_ENV
 
       - name: Install dependencies
-        run: pnpm i
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: build-output
-          path: .next/
-
-      - name: Display environment
-        run: echo "Deploying to ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }} environment"
-
-      - name: Restart application
         run: |
-          ENV="${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }}"
+          cd repo
+          npm install -g pnpm
+          pnpm i
+
+      - name: Build application
+        run: |
+          cd repo
+          pnpm build
+
+      - name: Deploy
+        run: |
+          cd repo
           if [ "$ENV" = "staging" ]; then
             pm2 restart ecosystem.config.js --env staging
           else
             pm2 restart ecosystem.config.js
           fi
+          echo "Deployed to $ENV environment"

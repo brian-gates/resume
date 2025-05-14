@@ -10,21 +10,31 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "20"
+        run: |
+          if [ -d "repo" ]; then
+            cd repo
+            git fetch origin
+            git checkout -f ${{ github.event.pull_request.head.sha }}
+          else
+            git clone https://github.com/brian-gates/resume.git repo
+            cd repo
+            git checkout -f ${{ github.event.pull_request.head.sha }}
+          fi
 
       - name: Install dependencies
-        run: pnpm i
+        run: |
+          cd repo
+          npm install -g pnpm
+          pnpm i
 
       - name: Build application
-        run: pnpm build
+        run: |
+          cd repo
+          pnpm build
 
       - name: Verify build output
         run: |
+          cd repo
           if [ -d ".next" ]; then
             echo "✅ Build successful! Production build verified."
             exit 0
