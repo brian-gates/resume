@@ -134,12 +134,14 @@ jobs:
           if [ "$DEPLOY_ENV" = "staging" ]; then
             echo "Deploying to STAGING on port 3001"
             PM2_APP_NAME="briangates-website-staging"
-            sed -i -e "s/name: \"briangates-website\"/name: \"$PM2_APP_NAME\"/" ecosystem.$DEPLOY_ENV.js
+            # Use cross-platform compatible sed command
+            sed "s/name: \"briangates-website\"/name: \"$PM2_APP_NAME\"/" ecosystem.config.js > ecosystem.$DEPLOY_ENV.js
             pm2 restart ecosystem.$DEPLOY_ENV.js --env staging || pm2 start ecosystem.$DEPLOY_ENV.js --env staging
           else
             echo "Deploying to PRODUCTION on port 3000"
             PM2_APP_NAME="briangates-website-production"
-            sed -i -e "s/name: \"briangates-website\"/name: \"$PM2_APP_NAME\"/" ecosystem.$DEPLOY_ENV.js
+            # Use cross-platform compatible sed command
+            sed "s/name: \"briangates-website\"/name: \"$PM2_APP_NAME\"/" ecosystem.config.js > ecosystem.$DEPLOY_ENV.js
             pm2 restart ecosystem.$DEPLOY_ENV.js || pm2 start ecosystem.$DEPLOY_ENV.js
           fi
           echo "Deployment complete to $DEPLOY_ENV environment at $(date)"
