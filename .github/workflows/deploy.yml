@@ -38,39 +38,74 @@ jobs:
           if [ -d "$REPO_DIR" ]; then
             echo "Updating existing repository"
             cd $REPO_DIR
-            git fetch
-            git checkout $GITHUB_REF_NAME
+            git fetch origin
+            git checkout $GITHUB_REF_NAME || git checkout staging
             git pull
           else
             echo "Cloning repository"
             git clone https://github.com/brian-gates/resume.git $REPO_DIR
             cd $REPO_DIR
-            git checkout $GITHUB_REF_NAME
+            git checkout $GITHUB_REF_NAME || git checkout staging
           fi
           echo "Using commit: $(git rev-parse HEAD)"
 
+      - name: Setup prerequisites
+        run: |
+          # Ensure NVM is installed
+          if [ ! -d "$HOME/.nvm" ]; then
+            echo "Installing NVM"
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          else
+            echo "NVM already installed"
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          fi
+
+          # Install Node.js
+          nvm install 20
+          nvm use 20
+
+          # Verify installations
+          echo "Node version: $(node --version)"
+          echo "NPM version: $(npm --version)"
+
+          # Install pnpm
+          npm install -g pnpm
+          echo "PNPM version: $(pnpm --version)"
+
       - name: Install dependencies
         run: |
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           cd $HOME/repo
-          which node || echo "Node not found"
-          node --version || echo "Node version unavailable"
-          npm --version || echo "NPM version unavailable"
-          npm install -g pnpm
           pnpm i
 
       - name: Build application
         run: |
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           cd $HOME/repo
           pnpm build
 
+      - name: Install PM2 if needed
+        run: |
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          npm list -g pm2 || npm install -g pm2
+          echo "PM2 version: $(pm2 --version)"
+
       - name: Deploy with PM2
         run: |
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           cd $HOME/repo
           if [ "$DEPLOY_ENV" = "staging" ]; then
             echo "Deploying to STAGING on port 3001"
-            pm2 restart ecosystem.config.js --env staging
+            pm2 restart ecosystem.config.js --env staging || pm2 start ecosystem.config.js --env staging
           else
             echo "Deploying to PRODUCTION on port 3000"
-            pm2 restart ecosystem.config.js
+            pm2 restart ecosystem.config.js || pm2 start ecosystem.config.js
           fi
           echo "Deployment complete to $DEPLOY_ENV environment"
