@@ -31,6 +31,7 @@ jobs:
             echo "DEPLOY_ENV=staging" >> $GITHUB_ENV
           fi
           echo "Will deploy to $DEPLOY_ENV environment"
+          echo "Job started at $(date)"
 
       - name: Clone or update repository
         run: |
