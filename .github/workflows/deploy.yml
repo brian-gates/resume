@@ -36,7 +36,7 @@ jobs:
         run: pnpm build
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: build-output
           path: .next/
@@ -60,7 +60,7 @@ jobs:
         run: pnpm i
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v2
         with:
           name: build-output
           path: .next/
