@@ -35,15 +35,15 @@ jobs:
 
       - name: Clone or update repository
         run: |
-          REPO_DIR=$HOME/repo
+          REPO_DIR=$HOME/repo-$DEPLOY_ENV
           if [ -d "$REPO_DIR" ]; then
-            echo "Updating existing repository"
+            echo "Updating existing repository in $REPO_DIR"
             cd $REPO_DIR
             git fetch origin
             git checkout $GITHUB_REF_NAME || git checkout staging
             git pull
           else
-            echo "Cloning repository"
+            echo "Cloning repository to $REPO_DIR"
             git clone https://github.com/brian-gates/resume.git $REPO_DIR
             cd $REPO_DIR
             git checkout $GITHUB_REF_NAME || git checkout staging
@@ -87,7 +87,7 @@ jobs:
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           nvm use 20
 
-          cd $HOME/repo
+          cd $HOME/repo-$DEPLOY_ENV
           echo "Node version: $(node --version)"
           echo "Running pnpm install..."
           pnpm i --no-frozen-lockfile
@@ -99,7 +99,7 @@ jobs:
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           nvm use 20
 
-          cd $HOME/repo
+          cd $HOME/repo-$DEPLOY_ENV
           echo "Building application..."
           pnpm build
           echo "Build completed."
@@ -126,12 +126,20 @@ jobs:
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           nvm use 20
 
-          cd $HOME/repo
+          cd $HOME/repo-$DEPLOY_ENV
+
+          # Copy ecosystem file to environment specific one
+          cp ecosystem.config.js ecosystem.$DEPLOY_ENV.js
+
           if [ "$DEPLOY_ENV" = "staging" ]; then
             echo "Deploying to STAGING on port 3001"
-            pm2 restart ecosystem.config.js --env staging || pm2 start ecosystem.config.js --env staging
+            PM2_APP_NAME="briangates-website-staging"
+            sed -i -e "s/name: \"briangates-website\"/name: \"$PM2_APP_NAME\"/" ecosystem.$DEPLOY_ENV.js
+            pm2 restart ecosystem.$DEPLOY_ENV.js --env staging || pm2 start ecosystem.$DEPLOY_ENV.js --env staging
           else
             echo "Deploying to PRODUCTION on port 3000"
-            pm2 restart ecosystem.config.js || pm2 start ecosystem.config.js
+            PM2_APP_NAME="briangates-website-production"
+            sed -i -e "s/name: \"briangates-website\"/name: \"$PM2_APP_NAME\"/" ecosystem.$DEPLOY_ENV.js
+            pm2 restart ecosystem.$DEPLOY_ENV.js || pm2 start ecosystem.$DEPLOY_ENV.js
           fi
           echo "Deployment complete to $DEPLOY_ENV environment at $(date)"
