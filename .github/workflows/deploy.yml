@@ -17,68 +17,60 @@ on:
           - production
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: self-hosted
-    environment: ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }}
 
     steps:
-      - name: Debug Information
+      - name: Get Environment
         run: |
-          echo "Current directory: $(pwd)"
-          echo "GitHub Ref: ${{ github.ref }}"
-          echo "GitHub SHA: ${{ github.sha }}"
-          echo "User: $(whoami)"
-          echo "Environment from ref: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}"
+          BRANCH=${GITHUB_REF#refs/heads/}
+          echo "Current branch: $BRANCH"
+          if [ "$BRANCH" = "main" ]; then
+            echo "DEPLOY_ENV=production" >> $GITHUB_ENV
+          else
+            echo "DEPLOY_ENV=staging" >> $GITHUB_ENV
+          fi
+          echo "Will deploy to $DEPLOY_ENV environment"
 
-      - name: Checkout repository
+      - name: Clone or update repository
         run: |
-          if [ -d "repo" ]; then
+          REPO_DIR=$HOME/repo
+          if [ -d "$REPO_DIR" ]; then
             echo "Updating existing repository"
-            cd repo
+            cd $REPO_DIR
             git fetch
-            git checkout ${{ github.ref }}
+            git checkout $GITHUB_REF_NAME
             git pull
           else
             echo "Cloning repository"
-            git clone https://github.com/brian-gates/resume.git repo
-            cd repo
-            git checkout ${{ github.ref }}
+            git clone https://github.com/brian-gates/resume.git $REPO_DIR
+            cd $REPO_DIR
+            git checkout $GITHUB_REF_NAME
           fi
-          echo "Current directory after checkout: $(pwd)"
-          ls -la
-
-      - name: Set environment variable
-        run: |
-          echo "ENV=${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }}" >> $GITHUB_ENV
-          echo "Environment set to: ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }}"
+          echo "Using commit: $(git rev-parse HEAD)"
 
       - name: Install dependencies
         run: |
-          cd repo
-          echo "Installing dependencies..."
-          which npm
+          cd $HOME/repo
+          which node || echo "Node not found"
+          node --version || echo "Node version unavailable"
+          npm --version || echo "NPM version unavailable"
           npm install -g pnpm
-          which pnpm
-          pnpm -v
           pnpm i
 
       - name: Build application
         run: |
-          cd repo
-          echo "Building application..."
+          cd $HOME/repo
           pnpm build
-          echo "Build complete. Contents of .next directory:"
-          ls -la .next
 
-      - name: Deploy
+      - name: Deploy with PM2
         run: |
-          cd repo
-          echo "Deploying to $ENV environment"
-          if [ "$ENV" = "staging" ]; then
-            echo "Starting staging deployment on port 3001"
+          cd $HOME/repo
+          if [ "$DEPLOY_ENV" = "staging" ]; then
+            echo "Deploying to STAGING on port 3001"
             pm2 restart ecosystem.config.js --env staging
           else
-            echo "Starting production deployment on port 3000"
+            echo "Deploying to PRODUCTION on port 3000"
             pm2 restart ecosystem.config.js
           fi
-          echo "Deployment complete to $ENV environment"
+          echo "Deployment complete to $DEPLOY_ENV environment"
