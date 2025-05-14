@@ -22,37 +22,63 @@ jobs:
     environment: ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }}
 
     steps:
+      - name: Debug Information
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "GitHub Ref: ${{ github.ref }}"
+          echo "GitHub SHA: ${{ github.sha }}"
+          echo "User: $(whoami)"
+          echo "Environment from ref: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}"
+
       - name: Checkout repository
         run: |
           if [ -d "repo" ]; then
+            echo "Updating existing repository"
             cd repo
+            git fetch
+            git checkout ${{ github.ref }}
             git pull
           else
+            echo "Cloning repository"
             git clone https://github.com/brian-gates/resume.git repo
             cd repo
+            git checkout ${{ github.ref }}
           fi
+          echo "Current directory after checkout: $(pwd)"
+          ls -la
 
       - name: Set environment variable
         run: |
           echo "ENV=${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }}" >> $GITHUB_ENV
+          echo "Environment set to: ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }}"
 
       - name: Install dependencies
         run: |
           cd repo
+          echo "Installing dependencies..."
+          which npm
           npm install -g pnpm
+          which pnpm
+          pnpm -v
           pnpm i
 
       - name: Build application
         run: |
           cd repo
+          echo "Building application..."
           pnpm build
+          echo "Build complete. Contents of .next directory:"
+          ls -la .next
 
       - name: Deploy
         run: |
           cd repo
+          echo "Deploying to $ENV environment"
           if [ "$ENV" = "staging" ]; then
+            echo "Starting staging deployment on port 3001"
             pm2 restart ecosystem.config.js --env staging
           else
+            echo "Starting production deployment on port 3000"
             pm2 restart ecosystem.config.js
           fi
-          echo "Deployed to $ENV environment"
+          echo "Deployment complete to $ENV environment"
