@@ -51,24 +51,25 @@ jobs:
 
       - name: Setup prerequisites
         run: |
-          # Ensure NVM is installed
-          if [ ! -d "$HOME/.nvm" ]; then
-            echo "Installing NVM"
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          else
-            echo "NVM already installed"
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          fi
+          # Add debug output
+          echo "HOME directory: $HOME"
+          echo "Current directory: $(pwd)"
+
+          # Load NVM
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+          [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+          # Debug versions
+          echo "Node version before: $(node --version 2>/dev/null || echo 'not found')"
+          echo "NVM version: $(nvm --version 2>/dev/null || echo 'not found')"
 
           # Install Node.js
           nvm install 20
           nvm use 20
 
           # Verify installations
-          echo "Node version: $(node --version)"
+          echo "Node version after: $(node --version)"
           echo "NPM version: $(npm --version)"
 
           # Install pnpm
@@ -77,29 +78,53 @@ jobs:
 
       - name: Install dependencies
         run: |
+          # Add debug output
+          echo "Current directory: $(pwd)"
+
+          # Load NVM and node
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm use 20
+
           cd $HOME/repo
-          pnpm i
+          echo "Node version: $(node --version)"
+          echo "Running pnpm install..."
+          pnpm i --no-frozen-lockfile
 
       - name: Build application
         run: |
+          # Load NVM and node
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm use 20
+
           cd $HOME/repo
+          echo "Building application..."
           pnpm build
+          echo "Build completed."
 
       - name: Install PM2 if needed
         run: |
+          # Load NVM and node
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          npm list -g pm2 || npm install -g pm2
+          nvm use 20
+
+          # Install PM2 globally if not already available
+          echo "Checking for PM2..."
+          if ! command -v pm2 &> /dev/null; then
+            echo "Installing PM2 globally..."
+            npm install -g pm2
+          fi
           echo "PM2 version: $(pm2 --version)"
 
       - name: Deploy with PM2
         run: |
+          # Load NVM and node
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm use 20
+
           cd $HOME/repo
           if [ "$DEPLOY_ENV" = "staging" ]; then
             echo "Deploying to STAGING on port 3001"
@@ -108,4 +133,4 @@ jobs:
             echo "Deploying to PRODUCTION on port 3000"
             pm2 restart ecosystem.config.js || pm2 start ecosystem.config.js
           fi
-          echo "Deployment complete to $DEPLOY_ENV environment"
+          echo "Deployment complete to $DEPLOY_ENV environment at $(date)"
