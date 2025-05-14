@@ -5,6 +5,7 @@ module.exports = {
       script: "pnpm",
       args: "start",
       instances: 1,
+      exec_mode: "fork",
       autorestart: true,
       watch: true,
       watch_delay: 1000,
