@@ -127,21 +127,68 @@ jobs:
           nvm use 20
 
           cd $HOME/repo-$DEPLOY_ENV
-
-          # Copy ecosystem file to environment specific one
-          cp ecosystem.config.js ecosystem.$DEPLOY_ENV.js
-
+          
+          # Create a custom PM2 config file for this environment
           if [ "$DEPLOY_ENV" = "staging" ]; then
             echo "Deploying to STAGING on port 3001"
             PM2_APP_NAME="briangates-website-staging"
-            # Use cross-platform compatible sed command
-            sed "s/name: \"briangates-website\"/name: \"$PM2_APP_NAME\"/" ecosystem.config.js > ecosystem.$DEPLOY_ENV.js
-            pm2 restart ecosystem.$DEPLOY_ENV.js --env staging || pm2 start ecosystem.$DEPLOY_ENV.js --env staging
+            
+            # Create a new PM2 ecosystem file with the right configuration
+            cat > ecosystem.staging.js << EOF
+module.exports = {
+  apps: [
+    {
+      name: "${PM2_APP_NAME}",
+      script: "pnpm",
+      args: "start",
+      instances: 1,
+      exec_mode: "fork",
+      autorestart: true,
+      watch: true,
+      watch_delay: 1000,
+      ignore_watch: ["node_modules", ".git", ".next/cache"],
+      max_memory_restart: "1G",
+      env: {
+        NODE_ENV: "production",
+        PORT: 3001,
+      },
+    },
+  ],
+};
+EOF
+            
+            # Start or restart the app
+            pm2 restart ecosystem.staging.js || pm2 start ecosystem.staging.js
           else
             echo "Deploying to PRODUCTION on port 3000"
             PM2_APP_NAME="briangates-website-production"
-            # Use cross-platform compatible sed command
-            sed "s/name: \"briangates-website\"/name: \"$PM2_APP_NAME\"/" ecosystem.config.js > ecosystem.$DEPLOY_ENV.js
-            pm2 restart ecosystem.$DEPLOY_ENV.js || pm2 start ecosystem.$DEPLOY_ENV.js
+            
+            # Create a new PM2 ecosystem file with the right configuration
+            cat > ecosystem.production.js << EOF
+module.exports = {
+  apps: [
+    {
+      name: "${PM2_APP_NAME}",
+      script: "pnpm",
+      args: "start",
+      instances: 1,
+      exec_mode: "fork",
+      autorestart: true,
+      watch: true,
+      watch_delay: 1000,
+      ignore_watch: ["node_modules", ".git", ".next/cache"],
+      max_memory_restart: "1G",
+      env: {
+        NODE_ENV: "production",
+        PORT: 3000,
+      },
+    },
+  ],
+};
+EOF
+            
+            # Start or restart the app
+            pm2 restart ecosystem.production.js || pm2 start ecosystem.production.js
           fi
+          
           echo "Deployment complete to $DEPLOY_ENV environment at $(date)"
