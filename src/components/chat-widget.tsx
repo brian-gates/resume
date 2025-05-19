@@ -14,9 +14,9 @@ type Message = {
   content: string
 }
 
-export function ChatWidget() {
-  if (process.env.NEXT_PUBLIC_ENABLE_CHAT !== 'true') return null
+const isChatEnabled = process.env.NEXT_PUBLIC_ENABLE_CHAT === 'true'
 
+function ChatWidgetImpl() {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
@@ -110,10 +110,10 @@ export function ChatWidget() {
                     <ReactMarkdown
                       components={{
                         a: ({ children, href = '#', ...props }) => <Link href={href} {...props}>{children}</Link>,
-                        p: ({ children, node, ...props }) => <p {...props}>{children}</p>,
+                        p: ({ children, ...props }) => <p {...props}>{children}</p>,
                         ul: ({ children, ...props }) => <List {...props}>{children}</List>,
                         ol: ({ children, ...props }) => <List as="ol" {...props}>{children}</List>,
-                        li: ({ children, node, ...props }) => <ListItem {...props}>{children}</ListItem>,
+                        li: ({ children, ...props }) => <ListItem {...props}>{children}</ListItem>,
                       }}
                     >
                       {message.content}
@@ -179,4 +179,8 @@ export function ChatWidget() {
       )}
     </div>
   )
+}
+
+export function ChatWidget() {
+  return isChatEnabled ? <ChatWidgetImpl /> : null
 } 
