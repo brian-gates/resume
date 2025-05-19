@@ -92,7 +92,7 @@ function ChatWidgetImpl() {
           </div>
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             <div className="text-sm text-muted-foreground mb-2">
-              Ask about my resume, skills, or experience (e.g. "What languages do you know?" or "Tell me about your work at Dollar Shave Club.").
+              Ask about my resume, skills, or experience (e.g. &quot;What languages do you know?&quot; or &quot;Tell me about your work at Dollar Shave Club.&quot;).
             </div>
             {messages.map((message, i) => (
               <div
