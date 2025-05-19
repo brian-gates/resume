@@ -19,6 +19,9 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+    env:
+      N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+      NEXT_PUBLIC_ENABLE_CHAT: 'true'
 
     steps:
       - name: Get Environment
@@ -155,7 +158,9 @@ jobs:
                 max_memory_restart: '1G',
                 env: {
                   NODE_ENV: 'production',
-                  PORT: ${PM2_PORT}
+                  PORT: ${PM2_PORT},
+                  N8N_WEBHOOK_URL: process.env.N8N_WEBHOOK_URL,
+                  NEXT_PUBLIC_ENABLE_CHAT: process.env.NEXT_PUBLIC_ENABLE_CHAT
                 }
               }]
             };
