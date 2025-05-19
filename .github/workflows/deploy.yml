@@ -44,6 +44,8 @@ jobs:
             cd $REPO_DIR
             git fetch origin
             git checkout $GITHUB_REF_NAME || git checkout staging
+            git reset --hard HEAD
+            git clean -fd
             git pull
           else
             echo "Cloning repository to $REPO_DIR"
