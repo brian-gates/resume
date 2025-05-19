@@ -90,16 +90,10 @@ function ChatWidgetImpl() {
               ✕
             </Button>
           </div>
-          <div className="px-4 pt-2 pb-1 text-sm text-muted-foreground border-b">
-            Ask me anything about my resume, skills, or experience. Try questions like:
-            <ul className="list-disc pl-5 mt-1">
-              <li>What programming languages do you know?</li>
-              <li>Tell me about your work at [Company]</li>
-              <li>What frameworks are you experienced with?</li>
-            </ul>
-          </div>
-          
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="text-sm text-muted-foreground mb-2">
+              Ask about my resume, skills, or experience (e.g. "What languages do you know?" or "Tell me about your work at Dollar Shave Club.").
+            </div>
             {messages.map((message, i) => (
               <div
                 key={i}
