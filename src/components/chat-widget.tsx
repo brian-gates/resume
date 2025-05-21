@@ -32,6 +32,10 @@ function ChatWidgetImpl() {
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    if (isOpen) inputRef.current?.focus();
+  }, [isOpen]);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
