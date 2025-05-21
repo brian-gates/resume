@@ -22,6 +22,7 @@ function ChatWidgetImpl() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const sessionId = useRef(crypto.randomUUID());
 
   const scrollToBottom = () => {
