@@ -56,3 +56,5 @@ logs/
 
 # npm lockfile
 package-lock.json
+
+schema.graphql

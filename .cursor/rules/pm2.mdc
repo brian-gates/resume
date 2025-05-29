@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Use pm2 for process management. [ecosystem.config.js](mdc:ecosystem.config.js)

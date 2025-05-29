@@ -19,11 +19,46 @@ model User {
 }
 
 model Resume {
-  id         String  @id @default(cuid())
-  name       String  @default("")
-  title      String  @default("")
-  contact    String?
-  summary    String  @default("")
-  skills     String?
-  experience String?
+  id          String       @id @default(cuid())
+  name        String       @default("")
+  title       String       @default("")
+  email       String       @default("")
+  phone       String       @default("")
+  github      String       @default("")
+  website     String       @default("")
+  summary     String       @default("")
+  skills      Skill[]      @relation("Skill_resume")
+  experiences Experience[] @relation("Experience_resume")
+}
+
+model Skill {
+  id       String  @id @default(cuid())
+  name     String  @default("")
+  level    String
+  resume   Resume? @relation("Skill_resume", fields: [resumeId], references: [id])
+  resumeId String? @map("resume")
+
+  @@index([resumeId])
+}
+
+model Experience {
+  id           String        @id @default(cuid())
+  company      String        @default("")
+  position     String        @default("")
+  period       String        @default("")
+  description  String        @default("")
+  achievements Achievement[] @relation("Achievement_experience")
+  resume       Resume?       @relation("Experience_resume", fields: [resumeId], references: [id])
+  resumeId     String?       @map("resume")
+
+  @@index([resumeId])
+}
+
+model Achievement {
+  id           String      @id @default(cuid())
+  text         String      @default("")
+  experience   Experience? @relation("Achievement_experience", fields: [experienceId], references: [id])
+  experienceId String?     @map("experience")
+
+  @@index([experienceId])
 }
