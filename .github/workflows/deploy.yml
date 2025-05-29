@@ -105,6 +105,14 @@ jobs:
           cd $HOME/repo-$DEPLOY_ENV
           pnpm prisma generate
 
+      - name: Generate GraphQL types
+        run: |
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm use 20
+          cd $HOME/repo-$DEPLOY_ENV
+          pnpm graphql-codegen
+
       - name: Build application
         run: |
           # Load NVM and node
