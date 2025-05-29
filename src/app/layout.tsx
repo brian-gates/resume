@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ChatWidget } from "~/components/chat-widget";
 import { ThemeProvider } from "~/components/theme-provider";
+import { resumeData } from "~/data/resume";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,9 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Brian Gates | Staff Software Engineer",
-  description:
-    "Resume of Brian Gates, Staff Software Engineer with expertise in TypeScript, React, and web technologies",
+  title: `${resumeData.name} | ${resumeData.title}`,
+  description: `Resume of ${resumeData.name}, ${resumeData.title}. ${resumeData.summary}`,
   icons: {
     icon: [
       { url: "/favicon.ico", type: "image/x-icon" },

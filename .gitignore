@@ -47,3 +47,12 @@ pm2-dev.log
 pm2-dev.pid
 logs/
 .pm2/
+
+# Keystone and Prisma
+/keystone.db
+/.keystone/
+/prisma/
+/.prisma/
+
+# npm lockfile
+package-lock.json

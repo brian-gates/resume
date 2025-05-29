@@ -4,11 +4,11 @@ export type ResumeData = {
   contact: {
     email: string;
     phone: string;
-    github: string;
+    github?: string;
     website: string;
   };
   summary: string;
-  skills: {
+  skills?: {
     expert: string[];
     intermediate: string[];
   };

@@ -48,15 +48,17 @@ export function Resume({
             <Phone className="h-4 w-4" />
             {contact.phone}
           </Link>
-          <Link
-            href={contact.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5"
-          >
-            <Github className="h-4 w-4" />
-            github.com/brian-gates
-          </Link>
+          {contact.github && (
+            <Link
+              href={contact.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5"
+            >
+              <Github className="h-4 w-4" />
+              github.com/brian-gates
+            </Link>
+          )}
           <Link
             href={contact.website}
             target="_blank"
@@ -70,32 +72,34 @@ export function Resume({
         <Lead>{summary}</Lead>
       </header>
 
-      <Section>
-        <H2>Skills</H2>
-        <div className="space-y-4">
-          <div className="border-l-4 border-primary pl-4 py-2">
-            <P className="mb-2 font-medium">Expert:</P>
-            <div className="flex flex-wrap gap-2">
-              {skills.expert.map((skill) => (
-                <Badge key={skill} variant="expert">
-                  {skill}
-                </Badge>
-              ))}
+      {skills && (
+        <Section>
+          <H2>Skills</H2>
+          <div className="space-y-4">
+            <div className="border-l-4 border-primary pl-4 py-2">
+              <P className="mb-2 font-medium">Expert:</P>
+              <div className="flex flex-wrap gap-2">
+                {skills.expert?.map((skill) => (
+                  <Badge key={skill} variant="expert">
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div className="border-l-4 border-accent pl-4 py-2">
-            <P className="mb-2 font-medium">Intermediate:</P>
-            <div className="flex flex-wrap gap-2">
-              {skills.intermediate.map((skill) => (
-                <Badge key={skill} variant="intermediate">
-                  {skill}
-                </Badge>
-              ))}
+            <div className="border-l-4 border-accent pl-4 py-2">
+              <P className="mb-2 font-medium">Intermediate:</P>
+              <div className="flex flex-wrap gap-2">
+                {skills.intermediate?.map((skill) => (
+                  <Badge key={skill} variant="intermediate">
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </Section>
+        </Section>
+      )}
 
       <Section>
         <H2>Experience</H2>

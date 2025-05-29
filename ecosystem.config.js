@@ -1,23 +1,19 @@
 module.exports = {
   apps: [
     {
-      name: "briangates-website",
+      name: "nextjs",
       script: "pnpm",
-      args: "start",
-      instances: 1,
-      exec_mode: "fork",
-      autorestart: true,
-      watch: true,
-      watch_delay: 1000,
-      ignore_watch: ["node_modules", ".git", ".next/cache"],
-      max_memory_restart: "1G",
+      args: "dev",
       env: {
-        NODE_ENV: "production",
-        PORT: 3000,
-      },
-      env_staging: {
-        NODE_ENV: "production",
         PORT: 3001,
+      },
+    },
+    {
+      name: "keystone",
+      script: "pnpm",
+      args: "keystone dev",
+      env: {
+        PORT: 3000,
       },
     },
   ],
