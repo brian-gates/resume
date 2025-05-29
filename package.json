@@ -15,7 +15,7 @@
     "pm2:monit": "pm2 monit",
     "deploy": "./scripts/deploy.sh",
     "postinstall": "pnpm prisma generate && node scripts/extract-resume-schema.cjs",
-    "codegen": "pnpm graphql-codegen && node scripts/extract-resume-schema.cjs"
+    "codegen": "pnpm graphql-codegen && node scripts/extract-resume-schema.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.52.0",

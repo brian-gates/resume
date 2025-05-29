@@ -1,4 +1,4 @@
-const { readFileSync, writeFileSync } = require("fs");
+import { readFileSync, writeFileSync } from "fs";
 
 const file = readFileSync("src/generated/graphql.ts", "utf8");
 const typeMap = {};
