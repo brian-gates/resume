@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Files should always be kebab-case, e.g. my-component.ts
