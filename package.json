@@ -14,9 +14,11 @@
     "pm2:logs": "pm2 logs",
     "pm2:monit": "pm2 monit",
     "deploy": "./scripts/deploy.sh",
-    "postinstall": "pnpm prisma generate && pnpm graphql-codegen"
+    "postinstall": "pnpm prisma generate && node scripts/extract-resume-schema.cjs",
+    "codegen": "pnpm graphql-codegen && node scripts/extract-resume-schema.cjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0",
     "@keystone-6/auth": "^8.1.0",
     "@keystone-6/core": "^6.5.1",
     "@prisma/client": "5.22.0",

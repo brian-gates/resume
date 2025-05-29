@@ -60,3 +60,4 @@ package-lock.json
 schema.graphql
 
 src/generated/graphql.ts
+src/generated/resume-schema.txt

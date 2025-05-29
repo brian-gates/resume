@@ -173,3 +173,32 @@ jobs:
           pm2 restart ecosystem.config.js || pm2 start ecosystem.config.js
 
           echo "Deployment complete to $DEPLOY_ENV environment at $(date)"
+
+      - name: Start Keystone (background)
+        run: |
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm use 20
+          cd $HOME/repo-$DEPLOY_ENV
+          pnpm prisma migrate deploy
+          nohup pnpm pm2:start &
+
+      - name: Wait for Keystone GraphQL endpoint to be ready (max 60s)
+        run: |
+          # Wait for Keystone GraphQL endpoint to be ready (max 60s)
+          for i in {1..30}; do
+            if curl -sf http://localhost:3000/api/graphql > /dev/null; then
+              echo "Keystone is up!"
+              break
+            fi
+            echo "Waiting for Keystone to be up..."
+            sleep 2
+          done
+
+      - name: Generate GraphQL types and schema
+        run: |
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm use 20
+          cd $HOME/repo-$DEPLOY_ENV
+          pnpm codegen
