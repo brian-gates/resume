@@ -70,7 +70,7 @@ export const resumeData: ResumeData = {
     {
       company: "Dataplor",
       position: "Senior Software Engineer",
-      period: "June 2025 – present",
+      period: "June 2025 - present",
       achievements: [
         "Built Hermes, an MCP (Model Context Protocol) server enabling AI-powered data filtering with tool-assisted querying for brands, areas, and business categories",
         "Integrated Hermes MCP server into dataplor-api's AI search endpoint, enabling intelligent tool-assisted filtering in the platform application",
@@ -83,7 +83,7 @@ export const resumeData: ResumeData = {
     {
       company: "Yardzen",
       position: "Staff Software Engineer",
-      period: "March 2024 – May 2025",
+      period: "March 2024 - May 2025",
       achievements: [
         "Replatformed from slow WordPress to blazing-fast Next.js, deploying on CloudRun via GitHub Actions and Nx",
         "Championed AI tooling like Cursor, establishing rules for AI, adding MCP integrations, and promoting best practices for using AI agents to write code",
@@ -100,7 +100,7 @@ export const resumeData: ResumeData = {
     {
       company: "Hadrian",
       position: "Senior Software Engineer",
-      period: "Oct 2023 – Feb 2024",
+      period: "Oct 2023 - Feb 2024",
       achievements: [
         "Helped build and release version two of Hadrian's internal workflow management software that guides all aspects of the factory's execution to build high precision parts for aerospace and aeronautics",
         "Built visual Node-based workflow editor with Xyflow (formerly React Flow)",
