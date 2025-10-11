@@ -61,13 +61,29 @@ export const resumeData: ResumeData = {
       "PHP",
       "PostgreSQL",
       "Python",
+      "Ruby on Rails",
+      "ETL",
+      "Star Schema",
     ],
   },
   experience: [
     {
+      company: "Dataplor",
+      position: "Senior Software Engineer",
+      period: "June 2025 – present",
+      achievements: [
+        "Built Hermes, an MCP (Model Context Protocol) server enabling AI-powered data filtering with tool-assisted querying for brands, areas, and business categories",
+        "Integrated Hermes MCP server into dataplor-api's AI search endpoint, enabling intelligent tool-assisted filtering in the platform application",
+        "Demonstrated MCP integration with third-party clients (Cursor) and built reference implementation using Vercel's AI SDK for HTTP and streaming CLI interfaces",
+        "Built comprehensive brand performance analytics dashboard in Next.js/TypeScript featuring same-store performance analysis, year-over-year trend visualization, and store-level breakdowns",
+        "Designed and implemented weighted average calculations and multi-axis visualizations showing total brand vs same-store traffic trends alongside store count evolution",
+        "Optimized dashboard performance from 2 minutes (existing APIs) to 8 seconds (SQL queries) to 50ms by architecting ETL pipelines in Ruby on Rails with Star Schema data modeling",
+      ],
+    },
+    {
       company: "Yardzen",
       position: "Staff Software Engineer",
-      period: "March 2024 – present",
+      period: "March 2024 – May 2025",
       achievements: [
         "Replatformed from slow WordPress to blazing-fast Next.js, deploying on CloudRun via GitHub Actions and Nx",
         "Championed AI tooling like Cursor, establishing rules for AI, adding MCP integrations, and promoting best practices for using AI agents to write code",
