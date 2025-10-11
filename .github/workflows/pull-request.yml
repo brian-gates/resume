@@ -23,12 +23,18 @@ jobs:
 
       - name: Install dependencies
         run: |
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm use 22
           cd repo
           npm install -g pnpm
           pnpm i
 
       - name: Build application
         run: |
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          nvm use 22
           cd repo
           pnpm build
 
