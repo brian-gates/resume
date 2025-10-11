@@ -28,6 +28,11 @@ jobs:
           echo "Current directory: $(pwd)"
           echo "PATH: $PATH"
           echo ""
+          echo "=== NVM Check ==="
+          echo "NVM_DIR: $NVM_DIR"
+          echo "ls -la ~/.nvm: $(ls -la ~/.nvm 2>&1 || echo 'NVM directory not found')"
+          echo "which nvm: $(which nvm 2>&1 || echo 'nvm not found')"
+          echo ""
           echo "=== Node.js Check ==="
           echo "Node version: $(node --version 2>&1 || echo 'Node not found')"
           echo "npm version: $(npm --version 2>&1 || echo 'npm not found')"
@@ -41,6 +46,12 @@ jobs:
           echo "=== Shell info ==="
           echo "Shell: $SHELL"
           echo "Home: $HOME"
+          echo ""
+          echo "=== Try sourcing nvm ==="
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && echo "NVM sourced successfully" || echo "Failed to source nvm"
+          echo "After sourcing - Node version: $(node --version 2>&1 || echo 'Still not found')"
+          echo "After sourcing - npm version: $(npm --version 2>&1 || echo 'Still not found')"
 
       - name: Install dependencies
         run: |
