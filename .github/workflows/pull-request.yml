@@ -21,38 +21,6 @@ jobs:
             git checkout -f ${{ github.event.pull_request.head.sha }}
           fi
 
-      - name: Debug environment
-        run: |
-          echo "=== Environment Debug ==="
-          echo "Current user: $(whoami)"
-          echo "Current directory: $(pwd)"
-          echo "PATH: $PATH"
-          echo ""
-          echo "=== NVM Check ==="
-          echo "NVM_DIR: $NVM_DIR"
-          echo "ls -la ~/.nvm: $(ls -la ~/.nvm 2>&1 || echo 'NVM directory not found')"
-          echo "which nvm: $(which nvm 2>&1 || echo 'nvm not found')"
-          echo ""
-          echo "=== Node.js Check ==="
-          echo "Node version: $(node --version 2>&1 || echo 'Node not found')"
-          echo "npm version: $(npm --version 2>&1 || echo 'npm not found')"
-          echo "pnpm version: $(pnpm --version 2>&1 || echo 'pnpm not found')"
-          echo ""
-          echo "=== Available commands ==="
-          echo "which node: $(which node 2>&1 || echo 'not found')"
-          echo "which npm: $(which npm 2>&1 || echo 'not found')"
-          echo "which pnpm: $(which pnpm 2>&1 || echo 'not found')"
-          echo ""
-          echo "=== Shell info ==="
-          echo "Shell: $SHELL"
-          echo "Home: $HOME"
-          echo ""
-          echo "=== Try sourcing nvm ==="
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && echo "NVM sourced successfully" || echo "Failed to source nvm"
-          echo "After sourcing - Node version: $(node --version 2>&1 || echo 'Still not found')"
-          echo "After sourcing - npm version: $(npm --version 2>&1 || echo 'Still not found')"
-
       - name: Install dependencies
         run: |
           export NVM_DIR="$HOME/.nvm"
