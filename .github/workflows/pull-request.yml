@@ -21,6 +21,27 @@ jobs:
             git checkout -f ${{ github.event.pull_request.head.sha }}
           fi
 
+      - name: Debug environment
+        run: |
+          echo "=== Environment Debug ==="
+          echo "Current user: $(whoami)"
+          echo "Current directory: $(pwd)"
+          echo "PATH: $PATH"
+          echo ""
+          echo "=== Node.js Check ==="
+          echo "Node version: $(node --version 2>&1 || echo 'Node not found')"
+          echo "npm version: $(npm --version 2>&1 || echo 'npm not found')"
+          echo "pnpm version: $(pnpm --version 2>&1 || echo 'pnpm not found')"
+          echo ""
+          echo "=== Available commands ==="
+          echo "which node: $(which node 2>&1 || echo 'not found')"
+          echo "which npm: $(which npm 2>&1 || echo 'not found')"
+          echo "which pnpm: $(which pnpm 2>&1 || echo 'not found')"
+          echo ""
+          echo "=== Shell info ==="
+          echo "Shell: $SHELL"
+          echo "Home: $HOME"
+
       - name: Install dependencies
         run: |
           cd repo
