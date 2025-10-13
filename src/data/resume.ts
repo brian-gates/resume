@@ -75,6 +75,7 @@ export const resumeData: ResumeData = {
         "Built Hermes, an MCP (Model Context Protocol) server enabling AI-powered data filtering with tool-assisted querying for brands, areas, and business categories",
         "Integrated Hermes MCP server into dataplor-api's AI search endpoint, enabling intelligent tool-assisted filtering in the platform application",
         "Demonstrated MCP integration with third-party clients (Cursor) and built reference implementation using Vercel's AI SDK for HTTP and streaming CLI interfaces",
+        "Implemented Microsoft Entra ID multi-tenant authentication with Datadog and Sentry monitoring for authentication tracking and error management",
         "Built comprehensive brand performance analytics dashboard in Next.js/TypeScript featuring same-store performance analysis, year-over-year trend visualization, and store-level breakdowns",
         "Designed and implemented weighted average calculations and multi-axis visualizations showing total brand vs same-store traffic trends alongside store count evolution",
         "Optimized dashboard performance from 2 minutes (existing APIs) to 8 seconds (SQL queries) to 50ms by architecting ETL pipelines in Ruby on Rails with Star Schema data modeling",
