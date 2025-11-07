@@ -6,6 +6,7 @@ export type ResumeData = {
     phone: string;
     github: string;
     website: string;
+    linkedin: string;
   };
   summary: string;
   skills: {
@@ -29,6 +30,7 @@ export const resumeData: ResumeData = {
     phone: "(949)280-4708",
     github: "https://github.com/brian-gates",
     website: "https://briangates.me",
+    linkedin: "https://linkedin.com/brian-gates",
   },
   summary:
     "Building mission critical software and tools with web technologies since 2006.",
