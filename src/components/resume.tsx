@@ -1,4 +1,4 @@
-import { Github, Globe, Mail, Phone } from "lucide-react";
+import { Github, Globe, Linkedin, Mail, Phone } from "lucide-react";
 import { Badge } from "~/components/ui/badge";
 import { Container } from "~/components/ui/container";
 import { DownloadButtons } from "~/components/ui/download-buttons";
@@ -65,6 +65,15 @@ export function Resume({
           >
             <Globe className="h-4 w-4" />
             {contact.website}
+          </Link>
+          <Link
+            href={contact.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5"
+          >
+            <Linkedin className="h-4 w-4" />
+            linkedin.com/brian-gates
           </Link>
         </div>
         <Lead>{summary}</Lead>
