@@ -30,7 +30,7 @@ export const resumeData: ResumeData = {
     phone: "(949)280-4708",
     github: "https://github.com/brian-gates",
     website: "https://briangates.me",
-    linkedin: "https://linkedin.com/brian-gates",
+    linkedin: "https://www.linkedin.com/in/briangates/",
   },
   summary:
     "Building mission critical software and tools with web technologies since 2006.",
