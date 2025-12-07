@@ -20,7 +20,8 @@ import {
 } from "~/components/ui/typography";
 import type { ResumeData } from "~/data/resume";
 
-const stripProtocol = (url: string) => url.replace(/^https?:\/\//, "");
+const stripUrlPrefix = (url: string) =>
+  url.replace(/^https?:\/\//, "").replace(/^www\./, "");
 
 export function Resume({
   name,
@@ -57,7 +58,7 @@ export function Resume({
             className="flex items-center gap-1.5"
           >
             <Github className="h-4 w-4" />
-            {stripProtocol(contact.github)}
+            {stripUrlPrefix(contact.github)}
           </Link>
           <Link
             href={contact.website}
@@ -66,7 +67,7 @@ export function Resume({
             className="flex items-center gap-1.5"
           >
             <Globe className="h-4 w-4" />
-            {stripProtocol(contact.website)}
+            {stripUrlPrefix(contact.website)}
           </Link>
           <Link
             href={contact.linkedin}
@@ -75,7 +76,7 @@ export function Resume({
             className="flex items-center gap-1.5"
           >
             <Linkedin className="h-4 w-4" />
-            {stripProtocol(contact.linkedin)}
+            {stripUrlPrefix(contact.linkedin)}
           </Link>
         </div>
         <Lead>{summary}</Lead>
