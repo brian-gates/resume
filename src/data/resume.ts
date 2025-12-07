@@ -70,9 +70,19 @@ export const resumeData: ResumeData = {
   },
   experience: [
     {
+      company: "Machina Labs",
+      position: "Senior Software Engineer",
+      period: "December 2025 - present",
+      description:
+        "Building AI-powered tools and platforms to transform manufacturing.",
+      achievements: [],
+    },
+    {
       company: "Dataplor",
       position: "Senior Software Engineer",
-      period: "June 2025 - present",
+      period: "June 2025 - December 2025",
+      description:
+        "Built Dataplor's SaaS platform for point of interest and visitation data analysis.",
       achievements: [
         "Built Hermes, an MCP (Model Context Protocol) server enabling AI-powered data filtering with tool-assisted querying for brands, areas, and business categories",
         "Integrated Hermes MCP server into dataplor-api's AI search endpoint, enabling intelligent tool-assisted filtering in the platform application",
@@ -87,6 +97,8 @@ export const resumeData: ResumeData = {
       company: "Yardzen",
       position: "Staff Software Engineer",
       period: "March 2024 - May 2025",
+      description:
+        "Built the next generation of Yardzen's website and marketing platform.",
       achievements: [
         "Replatformed from slow WordPress to blazing-fast Next.js, deploying on CloudRun via GitHub Actions and Nx",
         "Championed AI tooling like Cursor, establishing rules for AI, adding MCP integrations, and promoting best practices for using AI agents to write code",
@@ -104,6 +116,8 @@ export const resumeData: ResumeData = {
       company: "Hadrian",
       position: "Senior Software Engineer",
       period: "Oct 2023 - Feb 2024",
+      description:
+        "Built internal workflow management software for manufacturing.",
       achievements: [
         "Helped build and release version two of Hadrian's internal workflow management software that guides all aspects of the factory's execution to build high precision parts for aerospace and aeronautics",
         "Built visual Node-based workflow editor with Xyflow (formerly React Flow)",
@@ -150,7 +164,8 @@ export const resumeData: ResumeData = {
       company: "Codex Digital",
       position: "Senior Software Engineer",
       period: "Jun 2013 - Oct 2017",
-      description: "Led the R&D team on various projects.",
+      description:
+        "Built digital asset management software for Netflix and Marvel.",
       achievements: [
         "Collaborated with the core team to implement a shot pull system used by Marvel using Node, Express, Neo4j, and Redis for the REST API, and Ember.js for the UI",
         "Created cross-platform desktop application to facilitate uploading media to Netflix's Asset Ingestion API using Electron, React, Node, and CouchDB",
@@ -165,7 +180,7 @@ export const resumeData: ResumeData = {
       position: "Lead Software Engineer",
       period: "Jun 2009 - Jun 2013",
       description:
-        "Led the team in the development and maintenance of their Digital Asset Management software.",
+        "Built digital asset management software used by Marvel, Toyota, and other major brands.",
       achievements: [
         "Engineered proprietary front-end extensible component-based JS framework",
         "Assisted in building a proprietary component-based PHP framework",
