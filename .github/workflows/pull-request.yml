@@ -13,8 +13,7 @@ jobs:
         run: |
           if [ -d "repo" ]; then
             cd repo
-            git remote prune origin
-            git fetch origin
+            git fetch --prune origin
             git checkout -f ${{ github.event.pull_request.head.sha }}
           else
             git clone https://github.com/brian-gates/resume.git repo
