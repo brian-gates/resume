@@ -66,6 +66,8 @@ export const resumeData: ResumeData = {
       "Python",
       "Ruby on Rails",
       "Star Schema",
+      "Temporal",
+      "Three.js",
     ],
   },
   experience: [
@@ -74,8 +76,15 @@ export const resumeData: ResumeData = {
       position: "Senior Software Engineer",
       period: "December 2025 - present",
       description:
-        "Building AI-powered tools and platforms to transform manufacturing.",
-      achievements: [],
+        "Built Architect, a manufacturing process planning web app, from early-stage prototype toward production, spanning 3D visualization, durable workflow orchestration, and AI agent tooling.",
+      achievements: [
+        "Shipped end-to-end path planning and slice workflow UIs on top of Temporal, including 3D toolpath visualization in Three.js and a multi-stage parameter form that polls Temporal workflow state to drive form progression",
+        "Architected a unified Next.js 16 app from a multi-repo codebase, with Azure AD OAuth, an MCP server for AI agent access, and MAP Coordinator SDK integration (V1→V2)",
+        "Designed a part workspace with procedure/operation sidebar, parallel right-panel navigation, command palette, and a hotkey system",
+        "Integrated Datadog RUM and APM end-to-end; enabled server-side tracing on Azure App Service",
+        "Overhauled type safety across the codebase with Zod validation at all API boundaries",
+        "Embedded Claude Code into the team's engineering workflow — built an OAuth-secured MCP server exposing app tools to AI agents, and authored custom Claude skills automating onboarding, sandbox deployments, Jira sync, and task pickup",
+      ],
     },
     {
       company: "Dataplor",
