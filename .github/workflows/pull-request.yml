@@ -13,6 +13,7 @@ jobs:
         run: |
           if [ -d "repo" ]; then
             cd repo
+            git remote prune origin
             git fetch origin
             git checkout -f ${{ github.event.pull_request.head.sha }}
           else
