@@ -42,7 +42,7 @@ jobs:
           if [ -d "$REPO_DIR" ]; then
             echo "Updating existing repository in $REPO_DIR"
             cd $REPO_DIR
-            git fetch origin
+            git fetch --prune origin
             git checkout $GITHUB_REF_NAME || git checkout staging
             git reset --hard HEAD
             git clean -fd
