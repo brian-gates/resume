@@ -7,3 +7,11 @@ onlyBuiltDependencies:
 # within the last 24h (1440 min) so local resolution can't pull a too-fresh
 # version that CI will then reject.
 minimumReleaseAge: 1440
+
+# pnpm 11 renamed `onlyBuiltDependencies` to `allowBuilds` (kept both for
+# cross-version compatibility). CI installs the latest pnpm, so this must
+# be present or `pnpm install` hard-errors on ignored build scripts.
+allowBuilds:
+  core-js: true
+  sharp: true
+  unrs-resolver: true
