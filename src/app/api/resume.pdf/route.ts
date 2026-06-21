@@ -28,6 +28,22 @@ type JobExperience = {
   achievements: string[];
 };
 
+// jsPDF's standard Helvetica font only renders WinAnsi/ASCII glyphs. Any
+// other Unicode (arrows, em/en dashes, curly quotes, ellipsis) gets emitted as
+// raw UTF-8 bytes and shows up as mojibake (e.g. "→" -> "Â'") with broken
+// kerning. Normalize those to ASCII equivalents before drawing any text.
+function clean(text: string): string {
+  return text
+    .replace(/→/g, "->")
+    .replace(/←/g, "<-")
+    .replace(/[—–]/g, "-")
+    .replace(/[''‚]/g, "'")
+    .replace(/[""„]/g, '"')
+    .replace(/…/g, "...")
+    .replace(/[•·]/g, "-")
+    .replace(/ /g, " ");
+}
+
 export async function GET() {
   const pdf = new jsPDF({
     orientation: "portrait",
@@ -74,26 +90,26 @@ function addHeader(pdf: jsPDF, data: HeaderData, x: number, y: number): number {
 
   // Add name
   pdf.setFontSize(24);
-  pdf.text(name, x, y);
+  pdf.text(clean(name), x, y);
   const yAfterName = y + 10;
 
   // Add title
   pdf.setFontSize(16);
-  pdf.text(title, x, yAfterName);
+  pdf.text(clean(title), x, yAfterName);
   const yAfterTitle = yAfterName + 10;
 
   // Add contact info
   pdf.setFontSize(11);
-  pdf.text(`Email: ${contact.email}`, x, yAfterTitle);
+  pdf.text(clean(`Email: ${contact.email}`), x, yAfterTitle);
   const yAfterEmail = yAfterTitle + 6;
 
-  pdf.text(`Phone: ${contact.phone}`, x, yAfterEmail);
+  pdf.text(clean(`Phone: ${contact.phone}`), x, yAfterEmail);
   const yAfterPhone = yAfterEmail + 6;
 
-  pdf.text(`GitHub: ${contact.github}`, x, yAfterPhone);
+  pdf.text(clean(`GitHub: ${contact.github}`), x, yAfterPhone);
   const yAfterGithub = yAfterPhone + 6;
 
-  pdf.text(`Website: ${contact.website}`, x, yAfterGithub);
+  pdf.text(clean(`Website: ${contact.website}`), x, yAfterGithub);
   const yAfterContact = yAfterGithub + 12;
 
   return yAfterContact;
@@ -106,7 +122,7 @@ function addSummary(pdf: jsPDF, summary: string, x: number, y: number): number {
   const yAfterSummaryHeader = y + 6;
 
   pdf.setFontSize(11);
-  pdf.text(summary, x, yAfterSummaryHeader);
+  pdf.text(clean(summary), x, yAfterSummaryHeader);
   const yAfterSummaryText = yAfterSummaryHeader + 12;
 
   return yAfterSummaryText;
@@ -126,13 +142,15 @@ function addSkills(
 
   // Expert skills
   pdf.setFontSize(11);
-  const expertText = `Expert: ${skills.expert.join(", ")}`;
+  const expertText = clean(`Expert: ${skills.expert.join(", ")}`);
   const expertLines = pdf.splitTextToSize(expertText, pageWidth - 2 * x);
   pdf.text(expertLines, x, yAfterSkillsHeader);
   const yAfterExpertSkills = yAfterSkillsHeader + expertLines.length * 6;
 
   // Intermediate skills
-  const intermediateText = `Intermediate: ${skills.intermediate.join(", ")}`;
+  const intermediateText = clean(
+    `Intermediate: ${skills.intermediate.join(", ")}`
+  );
   const intermediateLines = pdf.splitTextToSize(
     intermediateText,
     pageWidth - 2 * x
@@ -158,11 +176,11 @@ function addJob(
 
   // Handle company and position
   pdf.setFontSize(12);
-  pdf.text(`${job.company} - ${job.position}`, x, updatedY);
+  pdf.text(clean(`${job.company} - ${job.position}`), x, updatedY);
   const yAfterJobTitle = updatedY + 6;
 
   // Handle period
-  const periodText = job.period.replace(/–/g, "-");
+  const periodText = clean(job.period);
   pdf.setFontSize(10);
   pdf.text(periodText, x, yAfterJobTitle);
   const yAfterPeriod = yAfterJobTitle + 6;
@@ -212,15 +230,9 @@ function addAchievement(
   // Check if we need a new page
   const updatedY = y > maxY - 10 ? startNewPage(pdf, x) : y;
 
-  // Clean the text for PDF rendering
-  const cleanAchievement = achievement
-    .replace(/'/g, "'")
-    .replace(/'/g, "'")
-    .replace(/–/g, "-");
-
   // Split long text to handle proper wrapping
   const splitText = pdf.splitTextToSize(
-    `- ${cleanAchievement}`,
+    clean(`- ${achievement}`),
     pageWidth - 2 * x - 5
   );
 
