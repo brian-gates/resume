@@ -4,6 +4,8 @@ import { Github, Linkedin } from "~/components/ui/brand-icons";
 import { Container } from "~/components/ui/container";
 import { DownloadButtons } from "~/components/ui/download-buttons";
 import { ModeToggle } from "~/components/ui/mode-toggle";
+import { TocRail } from "~/components/ui/toc-rail";
+import { roleAnchorId } from "~/lib/anchors";
 import {
   DateRange,
   ExperienceCard,
@@ -34,6 +36,7 @@ export function Resume({
 }: ResumeData) {
   return (
     <Container>
+      <TocRail experience={experience} />
       <header>
         <div className="flex justify-between items-center mb-4">
           <H1>{name}</H1>
@@ -83,7 +86,7 @@ export function Resume({
         <Lead>{summary}</Lead>
       </header>
 
-      <Section>
+      <Section id="skills" className="scroll-mt-20">
         <H2>Skills</H2>
         <div className="space-y-4">
           <div className="border-l-4 border-primary pl-4 py-2">
@@ -110,11 +113,15 @@ export function Resume({
         </div>
       </Section>
 
-      <Section>
+      <Section id="experience" className="scroll-mt-20">
         <H2>Experience</H2>
 
         {experience.map((job) => (
-          <ExperienceCard key={`${job.company}-${job.position}`}>
+          <ExperienceCard
+            key={`${job.company}-${job.position}`}
+            id={roleAnchorId(job)}
+            className="scroll-mt-20"
+          >
             <HeaderContainer>
               <H3>{job.company}</H3>
               <DateRange>{job.period}</DateRange>
