@@ -1,5 +1,6 @@
-import { Github, Globe, Linkedin, Mail, Phone } from "lucide-react";
+import { Globe, Mail, Phone } from "lucide-react";
 import { Badge } from "~/components/ui/badge";
+import { Github, Linkedin } from "~/components/ui/brand-icons";
 import { Container } from "~/components/ui/container";
 import { DownloadButtons } from "~/components/ui/download-buttons";
 import { ModeToggle } from "~/components/ui/mode-toggle";
