@@ -1,5 +1,6 @@
 import { jsPDF } from "jspdf";
 import { resumeData } from "~/data/resume";
+import { fontBase64 } from "./font";
 
 export const dynamic = "force-static";
 
@@ -28,22 +29,6 @@ type JobExperience = {
   achievements: string[];
 };
 
-// jsPDF's standard Helvetica font only renders WinAnsi/ASCII glyphs. Any
-// other Unicode (arrows, em/en dashes, curly quotes, ellipsis) gets emitted as
-// raw UTF-8 bytes and shows up as mojibake (e.g. "→" -> "Â'") with broken
-// kerning. Normalize those to ASCII equivalents before drawing any text.
-function clean(text: string): string {
-  return text
-    .replace(/→/g, "->")
-    .replace(/←/g, "<-")
-    .replace(/[—–]/g, "-")
-    .replace(/[''‚]/g, "'")
-    .replace(/[""„]/g, '"')
-    .replace(/…/g, "...")
-    .replace(/[•·]/g, "-")
-    .replace(/ /g, " ");
-}
-
 export async function GET() {
   const pdf = new jsPDF({
     orientation: "portrait",
@@ -56,7 +41,12 @@ export async function GET() {
   const margin = 20;
   const maxY = pageHeight - margin;
 
-  pdf.setFont("helvetica");
+  // Register an embedded Unicode TTF (subsetted DejaVu Sans) so glyphs outside
+  // WinAnsi — →, em/en dashes, curly quotes, … — render as real characters
+  // instead of mojibake. jsPDF's built-in Helvetica only covers WinAnsi.
+  pdf.addFileToVFS("ResumeSans.ttf", fontBase64);
+  pdf.addFont("ResumeSans.ttf", "ResumeSans", "normal");
+  pdf.setFont("ResumeSans");
 
   const { name, title, contact, summary, skills, experience } = resumeData;
 
@@ -74,7 +64,7 @@ export async function GET() {
   const yAfterSkills = addSkills(pdf, skills, margin, pageWidth, yAfterSummary);
   addExperience(pdf, experience, margin, pageWidth, maxY, yAfterSkills);
 
-  const pdfBuffer = pdf.output();
+  const pdfBuffer = pdf.output("arraybuffer");
 
   return new Response(pdfBuffer, {
     headers: {
@@ -90,26 +80,26 @@ function addHeader(pdf: jsPDF, data: HeaderData, x: number, y: number): number {
 
   // Add name
   pdf.setFontSize(24);
-  pdf.text(clean(name), x, y);
+  pdf.text(name, x, y);
   const yAfterName = y + 10;
 
   // Add title
   pdf.setFontSize(16);
-  pdf.text(clean(title), x, yAfterName);
+  pdf.text(title, x, yAfterName);
   const yAfterTitle = yAfterName + 10;
 
   // Add contact info
   pdf.setFontSize(11);
-  pdf.text(clean(`Email: ${contact.email}`), x, yAfterTitle);
+  pdf.text(`Email: ${contact.email}`, x, yAfterTitle);
   const yAfterEmail = yAfterTitle + 6;
 
-  pdf.text(clean(`Phone: ${contact.phone}`), x, yAfterEmail);
+  pdf.text(`Phone: ${contact.phone}`, x, yAfterEmail);
   const yAfterPhone = yAfterEmail + 6;
 
-  pdf.text(clean(`GitHub: ${contact.github}`), x, yAfterPhone);
+  pdf.text(`GitHub: ${contact.github}`, x, yAfterPhone);
   const yAfterGithub = yAfterPhone + 6;
 
-  pdf.text(clean(`Website: ${contact.website}`), x, yAfterGithub);
+  pdf.text(`Website: ${contact.website}`, x, yAfterGithub);
   const yAfterContact = yAfterGithub + 12;
 
   return yAfterContact;
@@ -122,7 +112,7 @@ function addSummary(pdf: jsPDF, summary: string, x: number, y: number): number {
   const yAfterSummaryHeader = y + 6;
 
   pdf.setFontSize(11);
-  pdf.text(clean(summary), x, yAfterSummaryHeader);
+  pdf.text(summary, x, yAfterSummaryHeader);
   const yAfterSummaryText = yAfterSummaryHeader + 12;
 
   return yAfterSummaryText;
@@ -142,15 +132,13 @@ function addSkills(
 
   // Expert skills
   pdf.setFontSize(11);
-  const expertText = clean(`Expert: ${skills.expert.join(", ")}`);
+  const expertText = `Expert: ${skills.expert.join(", ")}`;
   const expertLines = pdf.splitTextToSize(expertText, pageWidth - 2 * x);
   pdf.text(expertLines, x, yAfterSkillsHeader);
   const yAfterExpertSkills = yAfterSkillsHeader + expertLines.length * 6;
 
   // Intermediate skills
-  const intermediateText = clean(
-    `Intermediate: ${skills.intermediate.join(", ")}`
-  );
+  const intermediateText = `Intermediate: ${skills.intermediate.join(", ")}`;
   const intermediateLines = pdf.splitTextToSize(
     intermediateText,
     pageWidth - 2 * x
@@ -176,11 +164,11 @@ function addJob(
 
   // Handle company and position
   pdf.setFontSize(12);
-  pdf.text(clean(`${job.company} - ${job.position}`), x, updatedY);
+  pdf.text(`${job.company} - ${job.position}`, x, updatedY);
   const yAfterJobTitle = updatedY + 6;
 
   // Handle period
-  const periodText = clean(job.period);
+  const periodText = job.period;
   pdf.setFontSize(10);
   pdf.text(periodText, x, yAfterJobTitle);
   const yAfterPeriod = yAfterJobTitle + 6;
@@ -232,7 +220,7 @@ function addAchievement(
 
   // Split long text to handle proper wrapping
   const splitText = pdf.splitTextToSize(
-    clean(`- ${achievement}`),
+    `- ${achievement}`,
     pageWidth - 2 * x - 5
   );
 
