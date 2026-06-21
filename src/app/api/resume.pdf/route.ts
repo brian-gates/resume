@@ -1,5 +1,6 @@
 import { jsPDF } from "jspdf";
 import { resumeData } from "~/data/resume";
+import { fontBase64 } from "./font";
 
 export const dynamic = "force-static";
 
@@ -40,7 +41,12 @@ export async function GET() {
   const margin = 20;
   const maxY = pageHeight - margin;
 
-  pdf.setFont("helvetica");
+  // Register an embedded Unicode TTF (subsetted DejaVu Sans) so glyphs outside
+  // WinAnsi — →, em/en dashes, curly quotes, … — render as real characters
+  // instead of mojibake. jsPDF's built-in Helvetica only covers WinAnsi.
+  pdf.addFileToVFS("ResumeSans.ttf", fontBase64);
+  pdf.addFont("ResumeSans.ttf", "ResumeSans", "normal");
+  pdf.setFont("ResumeSans");
 
   const { name, title, contact, summary, skills, experience } = resumeData;
 
@@ -58,7 +64,7 @@ export async function GET() {
   const yAfterSkills = addSkills(pdf, skills, margin, pageWidth, yAfterSummary);
   addExperience(pdf, experience, margin, pageWidth, maxY, yAfterSkills);
 
-  const pdfBuffer = pdf.output();
+  const pdfBuffer = pdf.output("arraybuffer");
 
   return new Response(pdfBuffer, {
     headers: {
@@ -162,7 +168,7 @@ function addJob(
   const yAfterJobTitle = updatedY + 6;
 
   // Handle period
-  const periodText = job.period.replace(/–/g, "-");
+  const periodText = job.period;
   pdf.setFontSize(10);
   pdf.text(periodText, x, yAfterJobTitle);
   const yAfterPeriod = yAfterJobTitle + 6;
@@ -212,15 +218,9 @@ function addAchievement(
   // Check if we need a new page
   const updatedY = y > maxY - 10 ? startNewPage(pdf, x) : y;
 
-  // Clean the text for PDF rendering
-  const cleanAchievement = achievement
-    .replace(/'/g, "'")
-    .replace(/'/g, "'")
-    .replace(/–/g, "-");
-
   // Split long text to handle proper wrapping
   const splitText = pdf.splitTextToSize(
-    `- ${cleanAchievement}`,
+    `- ${achievement}`,
     pageWidth - 2 * x - 5
   );
 
