@@ -2,3 +2,8 @@ onlyBuiltDependencies:
   - core-js
   - sharp
   - unrs-resolver
+
+# Match the CI runner's supply-chain policy: reject packages published
+# within the last 24h (1440 min) so local resolution can't pull a too-fresh
+# version that CI will then reject.
+minimumReleaseAge: 1440
