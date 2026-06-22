@@ -143,20 +143,22 @@ jobs:
             PM2_PORT=3000
           fi
 
-          # Create a simple PM2 configuration file using node
+          # Generate the PM2 config: cluster mode + 2 instances so `pm2 reload`
+          # can swap workers one at a time with no down window. watch:false so
+          # the running app is never bounced by build output.
           node -e "
             const fs = require('fs');
             const config = {
               apps: [{
                 name: '${PM2_APP_NAME}',
-                script: 'pnpm',
-                args: 'start',
-                instances: 1,
-                exec_mode: 'fork',
+                script: 'server.js',
+                instances: 2,
+                exec_mode: 'cluster',
+                wait_ready: true,
+                listen_timeout: 10000,
+                kill_timeout: 5000,
                 autorestart: true,
-                watch: true,
-                watch_delay: 1000,
-                ignore_watch: ['node_modules', '.git', '.next/cache'],
+                watch: false,
                 max_memory_restart: '1G',
                 env: {
                   NODE_ENV: 'production',
@@ -169,7 +171,44 @@ jobs:
             fs.writeFileSync('ecosystem.config.js', 'module.exports = ' + JSON.stringify(config, null, 2) + ';');
           "
 
-          # Start or restart the app
-          pm2 restart ecosystem.config.js || pm2 start ecosystem.config.js
+          # Deploy strategy:
+          #  - Not running yet            -> cold start.
+          #  - Running in cluster mode    -> rolling `pm2 reload` (zero-downtime;
+          #    waits for each new worker's `ready` signal before killing the old).
+          #  - Running in fork mode       -> one-time cutover: delete + start, since
+          #    `pm2 reload` cannot change a running app's exec_mode (fork->cluster).
+          if pm2 describe "$PM2_APP_NAME" > /dev/null 2>&1; then
+            EXEC_MODE=$(pm2 jlist | node -e "
+              const apps = JSON.parse(require('fs').readFileSync(0, 'utf8'));
+              const app = apps.find(a => a.name === '$PM2_APP_NAME');
+              process.stdout.write(app && app.pm2_env ? (app.pm2_env.exec_mode || '') : '');
+            ")
+            echo "Current exec_mode for $PM2_APP_NAME: ${EXEC_MODE:-unknown}"
+            if [ "$EXEC_MODE" = "cluster_mode" ]; then
+              echo "Reloading $PM2_APP_NAME (zero-downtime rolling restart)"
+              pm2 reload ecosystem.config.js
+            else
+              echo "One-time cutover to cluster mode (brief blip): delete + start"
+              pm2 delete "$PM2_APP_NAME"
+              pm2 start ecosystem.config.js
+            fi
+          else
+            echo "Starting $PM2_APP_NAME for the first time"
+            pm2 start ecosystem.config.js
+          fi
 
           echo "Deployment complete to $DEPLOY_ENV environment at $(date)"
+
+      - name: Health check
+        run: |
+          if [ "$DEPLOY_ENV" = "staging" ]; then PM2_PORT=3001; else PM2_PORT=3000; fi
+          echo "Waiting for http://localhost:$PM2_PORT/healthz to report healthy..."
+          for i in $(seq 1 15); do
+            if curl -fsS "http://localhost:$PM2_PORT/healthz" > /dev/null; then
+              echo "Healthy after ${i}s."
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Health check failed: /healthz never returned 200 on port $PM2_PORT"
+          exit 1
