@@ -1,8 +1,12 @@
 "use client";
 
 import { Bot, Send } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
-import ReactMarkdown from "react-markdown";
+
+// Loaded on demand so the ~119 KB react-markdown chunk stays out of the
+// initial page bundle (it is only needed once an assistant message renders).
+const ReactMarkdown = dynamic(() => import("react-markdown"), { ssr: false });
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { List } from "~/components/ui/list";
@@ -88,7 +92,7 @@ function ChatWidgetImpl() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed bottom-24 right-4 z-50">
       {isOpen ? (
         <div className="bg-background border rounded-lg shadow-lg w-96 h-[500px] flex flex-col">
           <div
@@ -190,6 +194,7 @@ function ChatWidgetImpl() {
           <form onSubmit={handleSubmit} className="p-4 border-t">
             <div className="flex gap-2">
               <Input
+                ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about my professional experience..."

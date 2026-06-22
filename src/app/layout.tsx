@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ChatWidget } from "~/components/chat-widget";
+import { ChatWidgetLoader } from "~/components/chat-widget-loader";
 import { ThemeProvider } from "~/components/theme-provider";
 import "./globals.css";
 
@@ -44,8 +44,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <div className="fixed bottom-4 right-4">
-            <ChatWidget />
+          <div className="fixed bottom-24 right-4 z-50">
+            <ChatWidgetLoader />
           </div>
         </ThemeProvider>
       </body>
