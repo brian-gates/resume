@@ -35,7 +35,7 @@ export function Resume({
   experience,
 }: ResumeData) {
   return (
-    <Container>
+    <Container className="pb-32">
       <TocRail experience={experience} />
       <header>
         <div className="flex justify-between items-center mb-4">
@@ -136,18 +136,20 @@ export function Resume({
           </ExperienceCard>
         ))}
       </Section>
-      <div className="flex flex-col items-center gap-4 mt-8">
-        <DownloadButtons />
-        <Link
-          href="https://github.com/brian-gates/resume"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1.5 text-sm mt-2 text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <Github className="h-3 w-3" />
-          Source code available on GitHub
-        </Link>
-      </div>
+      <footer className="fixed inset-x-0 bottom-0 z-40 border-t bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/65">
+        <div className="mx-auto flex max-w-4xl flex-col items-center gap-1.5 px-4 py-3">
+          <DownloadButtons />
+          <Link
+            href="https://github.com/brian-gates/resume"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Github className="h-3 w-3" />
+            Source code available on GitHub
+          </Link>
+        </div>
+      </footer>
     </Container>
   );
 }
