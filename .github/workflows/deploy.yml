@@ -178,10 +178,19 @@ jobs:
           #  - Running in fork mode       -> one-time cutover: delete + start, since
           #    `pm2 reload` cannot change a running app's exec_mode (fork->cluster).
           if pm2 describe "$PM2_APP_NAME" > /dev/null 2>&1; then
-            EXEC_MODE=$(pm2 jlist | node -e "
-              const apps = JSON.parse(require('fs').readFileSync(0, 'utf8'));
-              const app = apps.find(a => a.name === '$PM2_APP_NAME');
-              process.stdout.write(app && app.pm2_env ? (app.pm2_env.exec_mode || '') : '');
+            # `pm2 jlist` can prepend warning banners and ANSI color codes to
+            # stdout (e.g. "In-memory PM2 is out-of-date"), so strip ANSI and
+            # slice from the first '[' before parsing. Never throws -> always
+            # yields a value so `set -e` can't abort the step here.
+            EXEC_MODE=$(pm2 jlist 2>/dev/null | node -e "
+              let s = require('fs').readFileSync(0, 'utf8').replace(/\x1b\[[0-9;]*[A-Za-z]/g, '');
+              let mode = '';
+              try {
+                const apps = JSON.parse(s.slice(s.indexOf('[')));
+                const app = apps.find(a => a.name === '$PM2_APP_NAME');
+                if (app && app.pm2_env) mode = app.pm2_env.exec_mode || '';
+              } catch (e) {}
+              process.stdout.write(mode);
             ")
             echo "Current exec_mode for $PM2_APP_NAME: ${EXEC_MODE:-unknown}"
             if [ "$EXEC_MODE" = "cluster_mode" ]; then
