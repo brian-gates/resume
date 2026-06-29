@@ -45,41 +45,56 @@ timeout) are reported as ❌ with the curl error, not a crash.
 
 ## Part 2 — Analytics summary (`analytics.sh`)
 
-Source: self-hosted Umami REST API, served first-party under `/stats`.
+Source: the self-hosted Umami Postgres database, queried directly over SSH. No HTTP
+API, no auth token, no 1Password.
 
-- API base: `https://briangates.me/stats/api`
-- Website id: `27ee491e-7f7b-4eac-972d-454a781f78ba` (public, already in the repo)
+- Umami runs as Docker containers on the host: app `umami-software/umami:3.1.0`,
+  database `postgres:16-alpine` (db name `umami`, user `umami`).
+- Website id: `27ee491e-7f7b-4eac-972d-454a781f78ba` (public, already in the repo).
 
-### Auth
+### Access
 
-Credentials come from 1Password via the CLI, using a service account token in the
-environment (`OP_SERVICE_ACCOUNT_TOKEN`):
+The script SSHes to the host and runs `psql` inside the database container:
 
 ```
-USERNAME=$(op read "op://Private/Umami Admin/username")
-PASSWORD=$(op read "op://Private/Umami Admin/password")
+ssh "$RESUME_SSH_HOST" 'docker exec "$DB_CONTAINER" psql -U umami -d umami -t -A -F"|" -c "<sql>"'
 ```
 
-Then `POST /stats/api/auth/login` with `{username, password}` → bearer `token`, used
-as `Authorization: Bearer <token>` on subsequent calls.
+- `RESUME_SSH_HOST` — the user's SSH alias for the host. Read from the environment,
+  defaulting to `briangates`. The alias (not an address) is the only host-specific
+  value the skill carries; addresses/ports/credentials stay out of the repo, per the
+  infrastructure doc's public-repo principle.
+- `DB_CONTAINER` — discovered dynamically on the host (`docker ps` filtered to the
+  umami db container) rather than hardcoded, so a container rename doesn't break it.
+- No DB password is needed: `psql` connects locally inside the container as the
+  `umami` superuser.
+
+### Schema facts (Umami 3.x, `website_event` table)
+
+- `event_type = 1` is a pageview.
+- distinct `session_id` = visitors; distinct `visit_id` = visits.
+- `url_path` = page; `referrer_domain` = referrer.
+- `created_at` (timestamptz) is used for all time-window filtering with
+  `now() - interval '...'`.
 
 ### Data pulled
 
-Time windows (epoch-millis ranges computed in the script):
+All scoped to `website_id = '27ee491e-...'`:
 
-- **Last 24h** and **last 7d**: `GET /websites/{id}/stats?startAt&endAt` →
-  pageviews, visitors, visits, bounces, total time.
-- **Prior 7d** (the 7 days before the last 7d): same `stats` call, for
-  week-over-week comparison. Umami's `stats` endpoint also accepts a comparison
-  range, but computing the prior window explicitly keeps the script API-version
-  independent.
-- **Top pages** (last 7d): `GET /websites/{id}/metrics?type=url&startAt&endAt`.
-- **Top referrers** (last 7d): `GET /websites/{id}/metrics?type=referrer&...`.
+- **Window stats** for **last 24h**, **last 7d**, and **prior 7d** (the 7 days before
+  the last 7d): pageviews (`count(*) FILTER (WHERE event_type=1)`),
+  visitors (`count(DISTINCT session_id)`), visits (`count(DISTINCT visit_id)`).
+- **Bounce rate** (last 7d): share of visits with a single pageview.
+- **Avg visit duration** (last 7d): mean of `max(created_at) - min(created_at)` per
+  `visit_id`.
+- **Top 5 pages** (last 7d): `url_path` by pageview count.
+- **Top 5 referrers** (last 7d): non-empty `referrer_domain` (excluding the site's own
+  hostname) by count.
 
-Output: a single JSON object (`{ "windows": {...}, "topPages": [...],
-"topReferrers": [...] }`) printed to stdout for the skill to interpret. Auth or
-fetch failure prints `{"error": "..."}` and exits non-zero so the skill reports the
-analytics section as unavailable without aborting Part 1.
+Output: a single JSON object (`{ "windows": {...}, "bounceRate": ..., "avgDuration":
+..., "topPages": [...], "topReferrers": [...] }`) on stdout for the skill to
+interpret. SSH/query failure prints `{"error": "..."}` and exits non-zero, so the
+skill reports the analytics section as unavailable without aborting Part 1.
 
 ## Skill behavior (`SKILL.md`)
 
@@ -91,23 +106,23 @@ analytics section as unavailable without aborting Part 1.
    - Bounce rate and average visit time for last 7d.
 3. Flag anomalies in plain language, e.g. "visitors down 40% week-over-week",
    "zero pageviews in last 24h — possible tracker outage", or any failed/warned check.
-4. If `op` is not configured (no `OP_SERVICE_ACCOUNT_TOKEN`, or `op read` fails),
-   the analytics section reports "not configured" with a one-line pointer to setup,
-   and Part 1 still runs and reports normally.
+4. If SSH/DB access fails (host unreachable, container not found, `psql` error), the
+   analytics section reports "unavailable" with the error, and Part 1 still runs and
+   reports normally.
 
 ## One-time setup (documented in SKILL.md)
 
-1. Install/confirm the 1Password CLI (`op`, already present at v2.33.1).
-2. Create a 1Password **service account** scoped to the vault holding the Umami
-   login; export `OP_SERVICE_ACCOUNT_TOKEN` in the shell profile.
-3. Create a 1Password item `Umami Admin` in the `Private` vault with `username` and
-   `password` fields matching the Umami dashboard login.
+1. An SSH alias for the host reachable without a passphrase prompt (the deploy already
+   relies on this). Default alias `briangates`; override with `RESUME_SSH_HOST`.
+2. Docker access on the host for the invoking user (already present).
+
+No credentials, tokens, or 1Password configuration are required.
 
 ## Error handling
 
 - Network/endpoint failures in Part 1 → per-check ❌ with the error; never aborts the run.
-- Analytics auth/fetch failure → analytics section degrades to "unavailable"/"not
-  configured"; Part 1 results are unaffected.
+- SSH/DB failure in Part 2 → analytics section degrades to "unavailable" with the
+  error; Part 1 results are unaffected.
 - Scripts are written to be self-documenting (no inline comments); SKILL.md is the
   module's README, per repo code-style conventions.
 
