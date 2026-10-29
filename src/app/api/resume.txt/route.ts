@@ -11,7 +11,8 @@ export async function GET() {
 Email: ${contact.email}
 Phone: ${contact.phone}
 GitHub: ${contact.github}
-Website: ${contact.website}\n`,
+Website: ${contact.website}
+LinkedIn: ${contact.linkedin}\n`,
     `Summary:
 ${summary}\n`,
     `Skills:
@@ -24,9 +25,11 @@ Intermediate: ${skills.intermediate.join(", ")}\n`,
           .map((achievement) => `- ${achievement.replace(/–/g, "-")}`)
           .join("\n");
 
+        const description = job.description ? `${job.description}\n` : "";
+
         return `${job.company} - ${job.position}
 ${periodText}
-${achievements}\n`;
+${description}${achievements}\n`;
       })
       .join("\n")}`,
   ];

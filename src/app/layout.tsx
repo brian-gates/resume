@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "~/components/analytics";
 import { ChatWidgetLoader } from "~/components/chat-widget-loader";
 import { ThemeProvider } from "~/components/theme-provider";
+import { resumeData } from "~/data/resume";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Brian Gates | Staff Software Engineer",
+  title: `${resumeData.name} | ${resumeData.title}`,
   description:
-    "Resume of Brian Gates, Staff Software Engineer with expertise in TypeScript, React, and web technologies",
+    "Brian Gates, software engineer at Machina Labs. Production web apps for robotic manufacturing, 3D tooling in React Three Fiber, and a supervised fleet of AI coding agents.",
   icons: {
     icon: [
       { url: "/favicon.ico", type: "image/x-icon" },
