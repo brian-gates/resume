@@ -51,7 +51,10 @@ export function Resume({
             <Mail className="h-4 w-4" />
             {contact.email}
           </Link>
-          <Link href={`tel:+19492804708`} className="flex items-center gap-1.5">
+          <Link
+            href={`tel:+1${contact.phone.replace(/\D/g, "")}`}
+            className="flex items-center gap-1.5"
+          >
             <Phone className="h-4 w-4" />
             {contact.phone}
           </Link>

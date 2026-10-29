@@ -9,6 +9,7 @@ type Contact = {
   phone: string;
   github: string;
   website: string;
+  linkedin: string;
 };
 
 type HeaderData = {
@@ -26,6 +27,7 @@ type JobExperience = {
   company: string;
   position: string;
   period: string;
+  description?: string;
   achievements: string[];
 };
 
@@ -60,7 +62,13 @@ export async function GET() {
     margin,
     initialY
   );
-  const yAfterSummary = addSummary(pdf, summary, margin, yAfterHeader);
+  const yAfterSummary = addSummary(
+    pdf,
+    summary,
+    margin,
+    pageWidth,
+    yAfterHeader
+  );
   const yAfterSkills = addSkills(pdf, skills, margin, pageWidth, yAfterSummary);
   addExperience(pdf, experience, margin, pageWidth, maxY, yAfterSkills);
 
@@ -100,20 +108,30 @@ function addHeader(pdf: jsPDF, data: HeaderData, x: number, y: number): number {
   const yAfterGithub = yAfterPhone + 6;
 
   pdf.text(`Website: ${contact.website}`, x, yAfterGithub);
-  const yAfterContact = yAfterGithub + 12;
+  const yAfterWebsite = yAfterGithub + 6;
+
+  pdf.text(`LinkedIn: ${contact.linkedin}`, x, yAfterWebsite);
+  const yAfterContact = yAfterWebsite + 12;
 
   return yAfterContact;
 }
 
 // Pure function to add the summary section
-function addSummary(pdf: jsPDF, summary: string, x: number, y: number): number {
+function addSummary(
+  pdf: jsPDF,
+  summary: string,
+  x: number,
+  pageWidth: number,
+  y: number
+): number {
   pdf.setFontSize(14);
   pdf.text("Summary", x, y);
   const yAfterSummaryHeader = y + 6;
 
   pdf.setFontSize(11);
-  pdf.text(summary, x, yAfterSummaryHeader);
-  const yAfterSummaryText = yAfterSummaryHeader + 12;
+  const summaryLines = pdf.splitTextToSize(summary, pageWidth - 2 * x);
+  pdf.text(summaryLines, x, yAfterSummaryHeader);
+  const yAfterSummaryText = yAfterSummaryHeader + summaryLines.length * 6 + 6;
 
   return yAfterSummaryText;
 }
@@ -173,6 +191,10 @@ function addJob(
   pdf.text(periodText, x, yAfterJobTitle);
   const yAfterPeriod = yAfterJobTitle + 6;
 
+  const yAfterDescription = job.description
+    ? addDescription(pdf, job.description, x, pageWidth, yAfterPeriod)
+    : yAfterPeriod;
+
   // Handle achievements (recursive)
   const yAfterAchievements = addAchievements(
     pdf,
@@ -180,10 +202,22 @@ function addJob(
     x,
     pageWidth,
     maxY,
-    yAfterPeriod
+    yAfterDescription
   );
 
   return yAfterAchievements + 8;
+}
+
+function addDescription(
+  pdf: jsPDF,
+  description: string,
+  x: number,
+  pageWidth: number,
+  y: number
+): number {
+  const lines = pdf.splitTextToSize(description, pageWidth - 2 * x);
+  pdf.text(lines, x, y);
+  return y + lines.length * 5 + 1;
 }
 
 // Recursive function to add all jobs

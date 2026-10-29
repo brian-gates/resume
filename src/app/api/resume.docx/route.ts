@@ -39,6 +39,9 @@ export async function GET() {
           new Paragraph({
             children: [new TextRun(`Website: ${contact.website}`)],
           }),
+          new Paragraph({
+            children: [new TextRun(`LinkedIn: ${contact.linkedin}`)],
+          }),
           new Paragraph({}),
 
           // Summary
@@ -87,6 +90,9 @@ export async function GET() {
             new Paragraph({
               children: [new TextRun({ text: job.period, italics: true })],
             }),
+            ...(job.description
+              ? [new Paragraph({ children: [new TextRun(job.description)] })]
+              : []),
             ...job.achievements.map(
               (achievement) =>
                 new Paragraph({
