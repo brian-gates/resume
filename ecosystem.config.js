@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "briangates-website",
+      name: "briangates-website-production",
       script: "server.js",
       instances: 2,
       exec_mode: "cluster",
